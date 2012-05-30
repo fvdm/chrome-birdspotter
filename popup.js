@@ -20,7 +20,7 @@ chrome.tabs.query(
 				// let's build the popup
 				for( var u in response.users ) {
 					var user = response.users[u];
-					document.getElementById('list').innerHTML = '<p>'+ user.username +'</p>';
+					document.getElementById('list').innerHTML += '<p><a href="https://twitter.com/#!/'+ user.username +'" target="_blank">@'+ user.username +'</a></p>';
 				}
 				
 			}
