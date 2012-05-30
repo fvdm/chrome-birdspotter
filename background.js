@@ -6,19 +6,21 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		
 		// bird spotted
 		case 'twitterUser':
-			tabs[ sender.tab.id ] = {
-				users: {},
-				amount: 0
+			if( tabs[ 't'+ sender.tab.id ] === undefined ) {
+				tabs[ 't'+ sender.tab.id ] = {
+					users: {},
+					amount: 0
+				}
 			}
 			
-			tabs[ sender.tab.id ].users[ request.user.username ] = request.user;
-			tabs[ sender.tab.id ].amount++;
 			
 			// update & display icon
 			chrome.pageAction.setTitle({
 				tabId:	sender.tab.id,
 				title:	tabs[ sender.tab.id ].amount == 1 ? 'Found a Twitter user' : 'Found '+ tabs[ sender.tab.id ].amount +' Twitter users'
 			});
+			tabs[ 't'+ sender.tab.id ].users[ request.user.username ] = request.user;
+			tabs[ 't'+ sender.tab.id ].amount++;
 			
 			chrome.pageAction.show( sender.tab.id );
 			
@@ -28,7 +30,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		
 		// popup wants something
 		case 'getUsers':
-			response( tabs[ request.tabId ] );
+			response( tabs[ 't'+ request.tabId ] );
 			break;
 		
 	}
