@@ -8,10 +8,8 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 					user:	{
 						username:	user,
 						title:		link.title ? link.title : false,
-						text:		link.innerText && link.innerText != '' ? link.innerText : false,
-						level:		'page'
-					},
-					host:	document.location.host
+						text:		link.innerText && link.innerText != '' ? link.innerText : false
+					}
 				});
 			});
 		}
