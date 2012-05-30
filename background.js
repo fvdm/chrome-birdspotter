@@ -26,7 +26,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		// popup wants something
 		case 'getUsers':
 			console.log(sender);
-			response( tabs[ sender.tab.id ] );
+			response( tabs[ request.tabId ] );
 			break;
 	}
 });
