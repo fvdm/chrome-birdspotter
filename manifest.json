@@ -12,7 +12,7 @@
 			"https://*/*",
 			"ftp://*/*"
 		],
-		"run_at":	"document_idle",
+		"run_at":	"document_end",
 		"js":		["twitter_detect.js"]
 	}],
 	"page_action": {
