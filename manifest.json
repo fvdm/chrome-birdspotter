@@ -3,12 +3,20 @@
 	"version":		"0.0.1",
 	"manifest_version":	2,
 	"description":		"Auto discover Twitter 'follow me' links in webpages and display a Twitter icon in the omnibar. Simply click the button to follow the user.",
-	"default_locale":	"en",,
 	"background": {
-		"scripts": [ "background.js" ]
+		"scripts":	["background.js"]
 	},
+	"content_scripts": [{
+		"matches":	[
+			"http://*/*",
+			"https://*/*",
+			"ftp://*/*"
+		],
+		"run_at":	"document_idle",
+		"js":		["twitter_detect.js"]
+	}],
 	"page_action": {
-		"default_icon":		"icons/twitterbtn.png",
+		"default_icon":		"icons/twitter_newbird_blue.png",
 		"default_title":	"Twitter username detected",
 		"default_popup":	"popup.html"
 	}
