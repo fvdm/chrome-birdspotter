@@ -1,4 +1,4 @@
-if( document.links.length >= 1 ) {
+if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
 		var link = document.links[l];
 		if( link.href ) {
