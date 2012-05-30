@@ -2,7 +2,7 @@
 	"version":		"0.0.1",
 	"name":			"Bird Spotter",
 	"manifest_version":	2,
-	"description":		"Auto discover Twitter 'follow me' links in webpages and display a Twitter icon in the omnibar. Simply click the button to follow the user.",
+	"description":		"Auto discover Twitter user links in webpages and display the Twitter button in the omnibar. Simply click the button to open the profile or view all found @users.",
 	"background": {
 		"scripts":	["background.js"]
 	},
