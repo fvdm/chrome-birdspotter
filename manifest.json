@@ -17,7 +17,7 @@
 	}],
 	"page_action": {
 		"default_icon":		"icons/twitter_newbird_blue.png",
-		"default_title":	"Twitter username detected",
+		"default_title":	"Bird Spotter",
 		"default_popup":	"popup.html"
 	},
 	"permissions": [
