@@ -1,6 +1,6 @@
 {
 	"name":			"Bird Spotter",
-	"version":		"1.0.1",
+	"version":		"1.0.2",
 	"manifest_version":	2,
 	"description":		"Auto discover Twitter user links in webpages. Click the bird to see and follow the detected @users.",
 	"icons": {
