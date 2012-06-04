@@ -1,8 +1,14 @@
 {
 	"name":			"Bird Spotter",
-	"version":		"1.0.0",
+	"version":		"1.0.1",
 	"manifest_version":	2,
-	"description":		"Auto discover Twitter user links in webpages and display the Twitter button in the omnibar. Simply click the button to see all found @users and their follow buttons.",
+	"description":		"Auto discover Twitter user links in webpages. Click the bird to see and follow the detected @users.",
+	"icons": {
+		"16":		"icons/Chrome_Bird_Spotter_logo_16.png",
+		"48":		"icons/Chrome_Bird_Spotter_logo_48.png",
+		"128":		"icons/Chrome_Bird_Spotter_logo_128.png"
+	},
+	"offline_enabled":	false,
 	"background": {
 		"scripts":	["background.js"]
 	},
