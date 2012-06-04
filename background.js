@@ -15,7 +15,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 				}
 			}
 			
-			tabs[ 't'+ sender.tab.id ].users[ request.user.username ] = request.user
+			tabs[ 't'+ sender.tab.id ].users[ request.user.username.toLowerCase() ] = request.user
 			tabs[ 't'+ sender.tab.id ].amount++
 			tabs[ 't'+ sender.tab.id ].href = request.href
 			
