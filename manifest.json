@@ -1,8 +1,8 @@
 {
-	"version":		"0.0.1",
 	"name":			"Bird Spotter",
+	"version":		"1.0.0",
 	"manifest_version":	2,
-	"description":		"Auto discover Twitter user links in webpages and display the Twitter button in the omnibar. Simply click the button to open the profile or view all found @users.",
+	"description":		"Auto discover Twitter user links in webpages and display the Twitter button in the omnibar. Simply click the button to see all found @users and their follow buttons.",
 	"background": {
 		"scripts":	["background.js"]
 	},
@@ -13,7 +13,7 @@
 			"ftp://*/*"
 		],
 		"run_at":	"document_end",
-		"js":		["twitter_detect.js"]
+		"js":		["bird_spotter.js"]
 	}],
 	"page_action": {
 		"default_icon":		"icons/twitter_newbird_blue.png",
@@ -22,8 +22,7 @@
 	},
 	"permissions": [
 		"tabs",
-		"http://*/*",
-		"https://*/*",
-		"ftp://*/*"
+		"https://*.twitter.com/*",
+		"https://twitter.com/*"
 	]
 }

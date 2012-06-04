@@ -1,4 +1,4 @@
-var tabs = {};
+var tabs = {}
 
 // incoming request
 chrome.extension.onRequest.addListener( function( request, sender, response ) {
@@ -15,21 +15,21 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 				}
 			}
 			
-			tabs[ 't'+ sender.tab.id ].users[ request.user.username ] = request.user;
-			tabs[ 't'+ sender.tab.id ].amount++;
-			tabs[ 't'+ sender.tab.id ].href = request.href;
+			tabs[ 't'+ sender.tab.id ].users[ request.user.username ] = request.user
+			tabs[ 't'+ sender.tab.id ].amount++
+			tabs[ 't'+ sender.tab.id ].href = request.href
 			
 			// display icon
-			chrome.pageAction.show( sender.tab.id );
+			chrome.pageAction.show( sender.tab.id )
 			
 			// all good
-			response({ status: 'ok' });
+			response({ status: 'ok' })
 			break;
 		
 		// popup wants something
 		case 'getUsers':
-			response( tabs[ 't'+ request.tabId ] );
+			response( tabs[ 't'+ request.tabId ] )
 			break;
 		
 	}
-});
+})

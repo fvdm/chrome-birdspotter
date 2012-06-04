@@ -1,4 +1,46 @@
-<div style="width:200px;">
-	<div id="list"></div>
+<style>
+	a {
+		color: #000;
+		text-decoration: none;
+	}
+	
+	#wrap {
+		font-family: helvetica, geneva, arial, sans-serif;
+	}
+	
+	#list {
+		padding: 0;
+		list-style: none;
+	}
+	
+		#list li {
+			padding: 0;
+			margin: 0 0 10px 0;
+			width: 300px;
+			height: 50px;
+		}
+		
+			#list .avatar {
+				float: left;
+				width: 58px;
+				height: 48px;
+			}
+			
+			#list .name {
+				float: left;
+				width: 175px;
+				overflow: hidden;
+			}
+			
+				#list .screenname {
+					height: 28px;
+					font-weight: bold;
+				}
+				
+				#list .button {
+				}
+</style>
+<div id="wrap">
+	<ul id="list"></ul>
 </div>
 <script src="popup.js"></script>
