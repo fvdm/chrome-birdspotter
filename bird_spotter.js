@@ -3,7 +3,9 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 		var link = document.links[l]
 		if( link.href ) {
 			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)\/?$/i, function( str, www, hash, username ) {
-				foundUser( username, link )
+				if( username != 'share' ) {
+					foundUser( username, link )
+				}
 			})
 			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/intent\/user\?.*screen_name=([a-z0-9_]+)&?.*$/i, function( str, www, username ) {
 				foundUser( username, link )
