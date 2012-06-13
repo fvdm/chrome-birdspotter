@@ -7,7 +7,7 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 					foundUser( username, link )
 				}
 			})
-			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/intent\/user\?.*screen_name=([a-z0-9_]+)&?.*$/i, function( str, www, username ) {
+			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/intent\/(user|tweet)\?.*screen_name=([a-z0-9_]+)&?.*$/i, function( str, www, mid, username ) {
 				foundUser( username, link )
 			})
 		}
