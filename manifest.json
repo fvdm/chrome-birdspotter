@@ -22,7 +22,7 @@
 		"js":		["bird_spotter.js"]
 	}],
 	"page_action": {
-		"default_icon":		"icons/twitter_newbird_blue.png",
+		"default_icon":		"icons/twitter-bird-light-bgs.png",
 		"default_title":	"Bird Spotter",
 		"default_popup":	"popup.html"
 	},
