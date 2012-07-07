@@ -21,7 +21,7 @@ chrome.tabs.query(
 				
 				// let's build the popup
 				for( var u in response.users ) {
-					document.getElementById('list').innerHTML += '<li><div class="avatar"><img src="https://api.twitter.com/1/users/profile_image?screen_name='+ response.users[u].username +'&size=normal&dnt=true"></div><div class="name"><div class="screenname">@'+ response.users[u].username +'</div><div class="button"><iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/follow_button.html?screen_name='+ response.users[u].username +'&lang=en&dnt=true&show_count=true&show_screen_name=false" style="width:240px;height:20px;"></iframe></div></div></li>'
+					document.getElementById('list').innerHTML += '<li><div class="avatar"><a href="https://twitter.com/'+ response.users[u].username +'" target="_blank"><img src="https://api.twitter.com/1/users/profile_image?screen_name='+ response.users[u].username +'&size=normal&dnt=true"></a></div><div class="name"><div class="screenname"><a href="https://twitter.com/'+ response.users[u].username +'" target="_blank">@'+ response.users[u].username +'</a></div><div class="button"><iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/follow_button.html?screen_name='+ response.users[u].username +'&lang=en&dnt=true&show_count=true&show_screen_name=false" style="width:240px;height:20px;"></iframe></div></div></li>'
 				}
 				
 			}
