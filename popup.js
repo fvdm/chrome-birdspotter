@@ -50,7 +50,7 @@ chrome.tabs.query(
 					buttonIframe.setAttribute( 'allowtransparency', true )
 					buttonIframe.setAttribute( 'frameBorder', 0 )
 					buttonIframe.setAttribute( 'scrolling', 'no' )
-					buttonIframe.setAttribute( 'src', 'https://platform.twitter.com/widgets/follow_button.html?screen_name='+ response.users[u].username +'&lang=en&dnt=true&show_count=false&show_screen_name=false' )
+					buttonIframe.setAttribute( 'src', 'https://platform.twitter.com/widgets/follow_button.html?screen_name='+ response.users[u].username +'&lang=en&dnt=true&show_count=true&show_screen_name=false' )
 					buttonIframe.style.width = '240px'
 					buttonIframe.style.height = '20px'
 					buttonDiv.className = 'button'
