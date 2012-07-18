@@ -19,14 +19,53 @@ chrome.tabs.query(
 				
 				// let's build the popup
 				for( var u in response.users ) {
-					document.getElementById('list').innerHTML += '\
-<li>\
-	<div class="avatar"><a href="https://twitter.com/'+ response.users[u].username +'" target="_blank"><img src="https://api.twitter.com/1/users/profile_image?screen_name='+ response.users[u].username +'&size=normal&dnt=true"></a></div>\
-	<div class="name">\
-		<div class="screenname"><a href="https://twitter.com/'+ response.users[u].username +'" target="_blank">@'+ response.users[u].username +'</a></div>\
-		<div class="button"><iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/follow_button.html?screen_name='+ response.users[u].username +'&lang=en&dnt=true&show_count=true&show_screen_name=false" style="width:240px;height:20px;"></iframe></div>\
-	</div>\
-</li>'
+					
+					// !init
+					var li = document.createElement('li'),
+					avatarDiv = document.createElement('div'),
+					avatarLink = document.createElement('a'),
+					avatarImage = document.createElement('img'),
+					nameDiv = document.createElement('div'),
+					screennameDiv = document.createElement('div'),
+					screennameLink = document.createElement('a'),
+					buttonDiv = document.createElement('div'),
+					buttonIframe = document.createElement('iframe')
+					
+					// !avatar
+					avatarImage.src = 'https://api.twitter.com/1/users/profile_image?screen_name='+ response.users[u].username +'&size=normal&dnt=true'
+					avatarLink.target = '_blank'
+					avatarLink.href = 'https://twitter.com/'+ response.users[u].username
+					avatarLink.appendChild( avatarImage )
+					avatarDiv.className = 'avatar'
+					avatarDiv.appendChild( avatarLink )
+										
+					// !screenname
+					screennameLink.target = '_blank'
+					screennameLink.href = 'https://twitter.com/'+ response.users[u].username
+					screennameLink.innerHTML = response.users[u].username
+					screennameDiv.className = 'screenname'
+					screennameDiv.appendChild( screennameLink )
+					
+					// !button
+					buttonIframe.setAttribute( 'allowtransparency', true )
+					buttonIframe.setAttribute( 'frameBorder', 0 )
+					buttonIframe.setAttribute( 'scrolling', 'no' )
+					buttonIframe.setAttribute( 'src', 'https://platform.twitter.com/widgets/follow_button.html?screen_name='+ response.users[u].username +'&lang=en&dnt=true&show_count=false&show_screen_name=false' )
+					buttonIframe.style.width = '240px'
+					buttonIframe.style.height = '20px'
+					buttonDiv.className = 'button'
+					buttonDiv.appendChild( buttonIframe )
+					
+					// !name
+					nameDiv.className = 'name'
+					nameDiv.appendChild( screennameDiv )
+					nameDiv.appendChild( buttonDiv )
+					
+					// !list item
+					li.appendChild( avatarDiv )
+					li.appendChild( nameDiv )
+					document.getElementById('list').appendChild( li )
+					
 				}
 				
 			}
