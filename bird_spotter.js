@@ -18,6 +18,7 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 
 // Found a user
 function foundUser( username, link ) {
+	var link = link === undefined ? {} : link
 	chrome.extension.sendRequest({
 		action:	'twitterUser',
 		user:	{
