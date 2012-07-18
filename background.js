@@ -1,10 +1,11 @@
+// Storage
 var tabs = {}
 
-// incoming request
+// Incoming request
 chrome.extension.onRequest.addListener( function( request, sender, response ) {
 	switch( request.action ) {
 		
-		// bird spotted
+		// Bird spotted
 		case 'twitterUser':
 			
 			// new tab, or tab changed URL
@@ -26,7 +27,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			response({ status: 'ok' })
 			break;
 		
-		// popup wants something
+		// Popup wants something
 		case 'getUsers':
 			response( tabs[ 't'+ request.tabId ] )
 			break;
