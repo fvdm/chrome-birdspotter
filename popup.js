@@ -18,6 +18,8 @@ chrome.tabs.query(
 			function( response ) {
 				
 				// let's build the popup
+				document.getElementById('wrap').innerHTML = '<ul id="list"></ul>'
+				
 				for( var u in response.users ) {
 					
 					// !init
