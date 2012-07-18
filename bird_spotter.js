@@ -15,6 +15,19 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	}
 }
 
+// Parse meta tags
+if( document.head.children && document.head.children.length >= 1 ) {
+	for( var m in document.head.children ) {
+		var tag = document.head.children[m]
+		if( tag.nodeName == 'META' ) {
+			if( tag.outerHTML.match( /(name|property)=['"]twitter:creator['"]/i ) ) {
+				tag.outerHTML.replace( /(content|value)=['"]([^'"]+)['"]/i, function( s, k, user ) {
+					foundUser( user )
+				})
+			}
+		}
+	}
+}
 
 // Found a user
 function foundUser( username, link ) {
