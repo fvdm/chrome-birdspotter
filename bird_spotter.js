@@ -1,4 +1,4 @@
-// Parse links
+// !Parse links
 if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
 		var link = document.links[l]
@@ -15,7 +15,7 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	}
 }
 
-// Parse meta tags
+// !Parse meta tags
 if( document.head.children && document.head.children.length >= 1 ) {
 	for( var m in document.head.children ) {
 		var tag = document.head.children[m]
@@ -29,7 +29,6 @@ if( document.head.children && document.head.children.length >= 1 ) {
 	}
 }
 
-// Found a user
 // !Parse widgets
 if( document.location.host != 'twitter.com' && document.scripts && document.scripts.length >= 1 ) {
 	for( var s in document.scripts ) {
@@ -45,6 +44,7 @@ if( document.location.host != 'twitter.com' && document.scripts && document.scri
 	}
 }
 
+// !Found a user
 function foundUser( username, link ) {
 	var link = link === undefined ? {} : link
 	chrome.extension.sendRequest({
