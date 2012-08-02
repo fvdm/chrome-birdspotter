@@ -48,7 +48,7 @@ if( document.location.host != 'twitter.com' && document.scripts && document.scri
 function foundUser( username ) {
 	chrome.extension.sendRequest({
 		action:	'twitterUser',
-		user:	username,
+		user:	username.toLowerCase(),
 		href:	document.location.href
 	})
 }
