@@ -30,6 +30,21 @@ if( document.head.children && document.head.children.length >= 1 ) {
 }
 
 // Found a user
+// !Parse widgets
+if( document.location.host != 'twitter.com' && document.scripts && document.scripts.length >= 1 ) {
+	for( var s in document.scripts ) {
+		var script = document.scripts[s]
+		if( script.src && script.src.match( /https?:\/\/([^\.]+)\.twitter\.com\//i ) ) {
+			script.src.replace( /\/statuses\/user_timeline\/([^\.]+)\./i, function( s, user ) {
+				foundUser( user )
+			})
+			script.src.replace( /\&screen_name=([^\&]+)\&/i, function( s, user ) {
+				foundUser( user )
+			})
+		}
+	}
+}
+
 function foundUser( username, link ) {
 	var link = link === undefined ? {} : link
 	chrome.extension.sendRequest({
