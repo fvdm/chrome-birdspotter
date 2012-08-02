@@ -1,6 +1,6 @@
 {
 	"name":				"Bird Spotter",
-	"version":			"1.2.0",
+	"version":			"1.3.0",
 	"manifest_version":		2,
 	"description":			"Discover Twitter users on pages",
 	"icons": {
