@@ -34,3 +34,10 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		
 	}
 })
+
+// !Tab closed
+chrome.tabs.onRemoved.addListener( function( tabId, removeInfo ) {
+	if( tabs[ 't'+ tabId ] !== undefined ) {
+		delete tabs[ 't'+ tabId ]
+	}
+})
