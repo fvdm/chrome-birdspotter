@@ -5,11 +5,11 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 		if( link.href ) {
 			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)(\?|\/)?/i, function( str, www, hash, username ) {
 				if( !username.match( /^(share|jobs|tos|privacy|images|settings|about|i|download|activity|who_to_follow|search|invitations)$/i ) ) {
-					foundUser( username, link )
+					foundUser( username )
 				}
 			})
 			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/intent\/(user|tweet)\?.*screen_name=([a-z0-9_]+)&?.*$/i, function( str, www, mid, username ) {
-				foundUser( username, link )
+				foundUser( username )
 			})
 		}
 	}
@@ -45,15 +45,10 @@ if( document.location.host != 'twitter.com' && document.scripts && document.scri
 }
 
 // !Found a user
-function foundUser( username, link ) {
-	var link = link === undefined ? {} : link
+function foundUser( username ) {
 	chrome.extension.sendRequest({
 		action:	'twitterUser',
-		user:	{
-			username:	username,
-			title:		link.title ? link.title : false,
-			text:		link.innerText && link.innerText != '' ? link.innerText : false
-		},
+		user:	username,
 		href:	document.location.href
 	})
 }

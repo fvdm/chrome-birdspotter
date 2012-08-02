@@ -17,13 +17,17 @@ chrome.tabs.query(
 			},
 			function( response ) {
 				
+				// !Sort
+				response.users.sort()
+				
+				// !Check network
 				if( navigator.onLine ) {
 					
 					// !Browser online
 					document.getElementById('wrap').innerHTML = '<ul id="list"></ul>'
 					for( var u in response.users ) {
 						
-						var user = response.users[u].username,
+						var user = response.users[u],
 						li = document.createElement('li'),
 						avatarDiv = document.createElement('div'),
 						avatarLink = document.createElement('a'),
@@ -71,7 +75,7 @@ chrome.tabs.query(
 					document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and follow buttons are not visible because your browser is offline.">browser offline</div><ul id="list"></ul>'
 					for( var u in response.users ) {
 						
-						var user = response.users[u].username,
+						var user = response.users[u],
 						li = document.createElement('li'),
 						screennameLink = document.createElement('a')
 						

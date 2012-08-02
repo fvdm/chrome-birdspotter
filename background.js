@@ -11,14 +11,15 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			// !new tab, or tab changed URL
 			if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != request.href ) {
 				tabs[ 't'+ sender.tab.id ] = {
-					users: {},
-					amount: 0
+					users: [],
+					href: request.href
 				}
 			}
 			
-			tabs[ 't'+ sender.tab.id ].users[ request.user.username.toLowerCase() ] = request.user
-			tabs[ 't'+ sender.tab.id ].amount++
-			tabs[ 't'+ sender.tab.id ].href = request.href
+			// !add to users
+			if( !inArray( request.user, tabs[ 't'+ sender.tab.id ].users ) ) {
+				tabs[ 't'+ sender.tab.id ].users.push( request.user )
+			}
 			
 			// !display icon
 			chrome.pageAction.show( sender.tab.id )
@@ -29,7 +30,9 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		
 		// !Popup wants something
 		case 'getUsers':
-			response( tabs[ 't'+ request.tabId ] )
+			if( tabs[ 't'+ request.tabId ] ) {
+				response( tabs[ 't'+ request.tabId ] )
+			}
 			break
 		
 	}
@@ -41,3 +44,15 @@ chrome.tabs.onRemoved.addListener( function( tabId, removeInfo ) {
 		delete tabs[ 't'+ tabId ]
 	}
 })
+
+// !inArray
+function inArray( needle, haystack ) {
+	if( haystack.length && haystack.length >= 1 ) {
+		for( var n in haystack ) {
+			if( haystack[n] == needle ) {
+				return true
+			}
+		}
+	}
+	return false
+}
