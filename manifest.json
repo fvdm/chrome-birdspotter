@@ -8,7 +8,7 @@
 		"48":			"icons/Chrome_Bird_Spotter_icon_48.png",
 		"128":			"icons/Chrome_Bird_Spotter_icon_128.png"
 	},
-	"offline_enabled":		false,
+	"offline_enabled":		true,
 	"background": {
 		"scripts":		["background.js"]
 	},

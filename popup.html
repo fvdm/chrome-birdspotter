@@ -8,6 +8,19 @@
 		font-family: helvetica, geneva, arial, sans-serif;
 	}
 	
+	#offline {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 35px;
+		height: 10px;
+		font-size: 9px;
+		word-wrap: break-word;
+		text-align: right;
+		color: #8a4500;
+		cursor: help;
+	}
+	
 	#list {
 		padding: 0;
 		list-style: none;
@@ -16,9 +29,17 @@
 		#list li {
 			padding: 0;
 			margin: 0 0 10px 0;
-			width: 300px;
-			height: 50px;
 		}
+			
+			#list .itemOnline {
+				width: 230px;
+				height: 50px;
+			}
+			
+			#list .itemOffline {
+				width: 200px;
+				height: 20px;
+			}
 		
 			#list .avatar {
 				float: left;
@@ -28,7 +49,7 @@
 			
 			#list .name {
 				float: left;
-				width: 175px;
+				width: 165px;
 				overflow: hidden;
 			}
 			
@@ -38,7 +59,9 @@
 					font-weight: bold;
 				}
 				
-				#list .button {
+				#list .button iframe {
+					width: 165px;
+					height: 20px;
 				}
 </style>
 <div id="wrap">
