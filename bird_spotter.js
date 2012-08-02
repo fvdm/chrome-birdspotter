@@ -3,7 +3,7 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
 		var link = document.links[l]
 		if( link.href ) {
-			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)\/?$/i, function( str, www, hash, username ) {
+			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)\/?/i, function( str, www, hash, username ) {
 				if( !username.match( /^(share|jobs|tos|privacy|images|settings|about|i|download|activity|who_to_follow|search|invitations)$/i ) ) {
 					foundUser( username, link )
 				}
