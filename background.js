@@ -8,7 +8,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		// !Bird spotted
 		case 'twitterUser':
 			
-			// new tab, or tab changed URL
+			// !new tab, or tab changed URL
 			if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != request.href ) {
 				tabs[ 't'+ sender.tab.id ] = {
 					users: {},
@@ -20,10 +20,10 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			tabs[ 't'+ sender.tab.id ].amount++
 			tabs[ 't'+ sender.tab.id ].href = request.href
 			
-			// display icon
+			// !display icon
 			chrome.pageAction.show( sender.tab.id )
 			
-			// all good
+			// !all good
 			response({ status: 'ok' })
 			break
 		

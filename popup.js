@@ -9,7 +9,7 @@ chrome.tabs.query(
 		// found it
 		var tab = tabs[0]
 		
-		// get Twitter users from this tab
+		// !Get Twitter users from this tab
 		chrome.extension.sendRequest(
 			{
 				action: 'getUsers',
