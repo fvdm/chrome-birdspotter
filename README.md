@@ -3,6 +3,9 @@ BirdSpotter
 
 Chrome extension to auto discover Twitter users in webpages.
 
+* [Installation](#installation)
+* [Detection](#detection)
+
 # Installation
 
 Either install from the Chrome Webstore, this is always the latest stable release with automatic updates.
