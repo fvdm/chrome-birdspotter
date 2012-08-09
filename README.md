@@ -10,7 +10,7 @@ Chrome extension to auto discover Twitter users in webpages.
 
 Either install from the Chrome Webstore, this is always the latest stable release with automatic updates.
 
-**[Open Bird Spotter in the Webstore](https://chrome.google.com/webstore/detail/ggnolfdnhcpnjipfjbicfjifmodbckok)**
+**[Bird Spotter in the Chrome Webstore](https://chrome.google.com/webstore/detail/ggnolfdnhcpnjipfjbicfjifmodbckok)**
 
 Or from Github:
 
