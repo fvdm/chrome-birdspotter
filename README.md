@@ -18,7 +18,7 @@ Or from Github:
 git clone https://github.com/fvdm/BirdSpotter
 ```
 
-And then go to your extensions, click Advanced, the install from source and browse to the BirdSpotter folder.
+And then go to [your extensions](chrome://chrome/extensions/), enable `Developer mode` (checkbox top-right), click `Load unpacked extension` to install from source and browse to the BirdSpotter folder.
 
 # Detection
 
