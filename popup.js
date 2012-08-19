@@ -47,8 +47,10 @@ chrome.tabs.query(
 						nameDiv.appendChild( screennameDiv )
 						nameDiv.appendChild( detailsDiv )
 						
+						link.setAttribute( 'data-username', bird.screen_name )
 						link.href = 'https://twitter.com/'+ bird.screen_name
 						link.target = '_blank'
+						link.onclick = displayIntent
 						link.appendChild( avatarDiv )
 						link.appendChild( nameDiv )
 						
@@ -85,3 +87,10 @@ chrome.tabs.query(
 		)
 	}
 )
+
+function displayIntent() {
+	var left = parseInt( (screen.availWidth / 2) - 250 )
+	var top = parseInt( (screen.availHeight / 2) - 184 )
+	window.open( 'https://twitter.com/intent/user?screen_name='+ this.getAttribute('data-username') +'&dnt=true', 'twitterIntent', 'width=500,height=368,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,screenX='+ left +',screenY='+ top )
+	return false
+}
