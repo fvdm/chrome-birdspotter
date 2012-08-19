@@ -18,8 +18,8 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			
 			// !add to users
 			if( tabs[ 't'+ sender.tab.id ].users[ request.user ] === undefined ) {
-					if( bird.screen_name !== undefined ) {
 				fetch_bird( request.user, function( bird ) {
+					if( bird ) {
 						tabs[ 't'+ sender.tab.id ].users[ request.user.toLowerCase() ] = {
 							screen_name:			bird.screen_name,
 							id_str:				bird.id_str,
@@ -76,7 +76,13 @@ function fetch_bird( username, cb ) {
 			if( data.length >= 2 && data.substr(0,1) == '{' && data.substr( data.length -1, 1 ) == '}' ) {
 				data = JSON.parse( data )
 				console.log( 'User '+ username +': ', data )
-				cb( data )
+				if( data && data.screen_name !== undefined ) {
+					cb( data )
+				} else {
+					cb( false )
+				}
+			} else {
+				cb( false )
 			}
 		}
 	}
