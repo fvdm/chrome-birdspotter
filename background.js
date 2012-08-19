@@ -18,8 +18,8 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			
 			// !add to users
 			if( tabs[ 't'+ sender.tab.id ].users[ request.user ] === undefined ) {
-				twitter_user( request.user, function( bird ) {
 					if( bird.screen_name !== undefined ) {
+				fetch_bird( request.user, function( bird ) {
 						tabs[ 't'+ sender.tab.id ].users[ request.user.toLowerCase() ] = {
 							screen_name:			bird.screen_name,
 							id_str:				bird.id_str,
@@ -68,7 +68,7 @@ chrome.tabs.onRemoved.addListener( function( tabId, removeInfo ) {
 })
 
 // Get user from Twitter API
-function twitter_user( username, cb ) {
+function fetch_bird( username, cb ) {
 	var xhr = new XMLHttpRequest()
 	xhr.onreadystatechange = function() {
 		if( xhr.readyState == 4 ) {
