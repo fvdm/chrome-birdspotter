@@ -80,6 +80,6 @@ function twitter_user( username, cb ) {
 			}
 		}
 	}
-	xhr.open("GET", 'https://api.twitter.com/1/users/show.json?screen_name='+ username +'&include_entities=false', true)
+	xhr.open( 'GET', 'https://api.twitter.com/1/users/show.json?screen_name='+ username +'&include_entities=false&dnt=true', true )
 	xhr.send()
 }
