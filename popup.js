@@ -65,14 +65,14 @@ chrome.tabs.query(
 					document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and follow buttons are not visible because your browser is offline.">browser offline</div><ul id="list"></ul>'
 					for( var u in response.users ) {
 						
-						var user = response.users[u],
+						var bird = response.users[u],
 						li = document.createElement('li'),
 						screennameLink = document.createElement('a')
 						
 						screennameLink.target = '_blank'
-						screennameLink.href = 'https://twitter.com/'+ user
+						screennameLink.href = 'https://twitter.com/'+ bird.screen_name
 						screennameLink.className = 'screenname'
-						screennameLink.innerHTML = user
+						screennameLink.innerHTML = bird.screen_name
 						
 						li.className = 'itemOffline'
 						li.appendChild( screennameLink )
