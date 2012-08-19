@@ -67,7 +67,7 @@ chrome.tabs.onRemoved.addListener( function( tabId, removeInfo ) {
 	}
 })
 
-// Get user from Twitter API
+// !Get user from Twitter API
 function fetch_bird( username, cb ) {
 	var xhr = new XMLHttpRequest()
 	xhr.onreadystatechange = function() {
@@ -75,7 +75,6 @@ function fetch_bird( username, cb ) {
 			var data = xhr.responseText.trim()
 			if( data.length >= 2 && data.substr(0,1) == '{' && data.substr( data.length -1, 1 ) == '}' ) {
 				data = JSON.parse( data )
-				console.log( 'User '+ username +': ', data )
 				if( data && data.screen_name !== undefined ) {
 					cb( data )
 				} else {
