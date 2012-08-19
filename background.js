@@ -29,6 +29,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 							description:			bird.description,
 							protected:			bird.protected,
 							followers_count:		bird.followers_count,
+							followers_count_human:		human_number( bird.followers_count ),
 							friends_count:			bird.friends_count,
 							created_at:			bird.created_at,
 							utc_offset:			bird.utc_offset,
@@ -87,4 +88,16 @@ function fetch_bird( username, cb ) {
 	}
 	xhr.open( 'GET', 'https://api.twitter.com/1/users/show.json?screen_name='+ username +'&include_entities=false&dnt=true', true )
 	xhr.send()
+}
+
+// !Human numbers
+function human_number( number ) {
+	var units = ['', 'K', 'M', 'G', 'T']
+	var num = number
+	var i = 0
+	while( num >= 10000 ) {
+		num = num / 1000
+		i++
+	}
+	return Math.floor(num) + units[i]
 }

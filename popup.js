@@ -31,7 +31,8 @@ chrome.tabs.query(
 						avatarImage = document.createElement('img'),
 						nameDiv = document.createElement('div'),
 						screennameDiv = document.createElement('div'),
-						screennameLink = document.createElement('a')
+						screennameLink = document.createElement('a'),
+						detailsDiv = document.createElement('div')
 						
 						avatarImage.src = bird.profile_image_url_https +'?dnt=true'
 						avatarLink.target = '_blank'
@@ -46,8 +47,12 @@ chrome.tabs.query(
 						screennameDiv.className = 'screenname'
 						screennameDiv.appendChild( screennameLink )
 						
+						detailsDiv.className = 'details'
+						detailsDiv.innerHTML = bird.followers_count_human +' followers<br>'+ bird.description.substr(0,100)
+						
 						nameDiv.className = 'name'
 						nameDiv.appendChild( screennameDiv )
+						nameDiv.appendChild( detailsDiv )
 						
 						li.className = 'itemOnline'
 						li.appendChild( avatarDiv )
