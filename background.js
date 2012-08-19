@@ -20,25 +20,35 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			if( tabs[ 't'+ sender.tab.id ].users[ request.user ] === undefined ) {
 				fetch_bird( request.user, function( bird ) {
 					if( bird ) {
-						tabs[ 't'+ sender.tab.id ].users[ request.user.toLowerCase() ] = {
-							screen_name:			bird.screen_name,
-							id_str:				bird.id_str,
-							name:				bird.name,
-							location:			bird.location,
-							url:				bird.url,
-							description:			bird.description,
-							protected:			bird.protected,
-							followers_count:		bird.followers_count,
-							followers_count_human:		human_number( bird.followers_count ),
-							friends_count:			bird.friends_count,
-							created_at:			bird.created_at,
-							utc_offset:			bird.utc_offset,
-							verified:			bird.verified,
-							statuses_count:			bird.statuses_count,
-							lang:				bird.lang,
-							profile_image_url_https:	bird.profile_image_url_https,
-							following:			bird.following,
-							follow_request_sent:		bird.follow_request_sent
+						if( bird.id_str ) {
+							
+							// !Storage: Browser online
+							tabs[ 't'+ sender.tab.id ].users[ request.user.toLowerCase() ] = {
+								screen_name:			bird.screen_name,
+								id_str:				bird.id_str,
+								name:				bird.name,
+								location:			bird.location,
+								url:				bird.url,
+								description:			bird.description,
+								protected:			bird.protected,
+								followers_count:		bird.followers_count,
+								followers_count_human:		human_number( bird.followers_count ),
+								friends_count:			bird.friends_count,
+								created_at:			bird.created_at,
+								utc_offset:			bird.utc_offset,
+								verified:			bird.verified,
+								statuses_count:			bird.statuses_count,
+								lang:				bird.lang,
+								profile_image_url_https:	bird.profile_image_url_https,
+								following:			bird.following,
+								follow_request_sent:		bird.follow_request_sent
+							}
+						} else {
+							
+							// !Storage: Browser offline
+							tabs[ 't'+ sender.tab.id ].users[ request.user.toLowerCase() ] = {
+								screen_name:			bird.screen_name
+							}
 						}
 					}
 				})
@@ -70,24 +80,34 @@ chrome.tabs.onRemoved.addListener( function( tabId, removeInfo ) {
 
 // !Get user from Twitter API
 function fetch_bird( username, cb ) {
-	var xhr = new XMLHttpRequest()
-	xhr.onreadystatechange = function() {
-		if( xhr.readyState == 4 ) {
-			var data = xhr.responseText.trim()
-			if( data.length >= 2 && data.substr(0,1) == '{' && data.substr( data.length -1, 1 ) == '}' ) {
-				data = JSON.parse( data )
-				if( data && data.screen_name !== undefined ) {
-					cb( data )
+	if( navigator.onLine ) {
+		
+		// !Fetcher: Browser online
+		var xhr = new XMLHttpRequest()
+		xhr.onreadystatechange = function() {
+			if( xhr.readyState == 4 ) {
+				var data = xhr.responseText.trim()
+				if( data.length >= 2 && data.substr(0,1) == '{' && data.substr( data.length -1, 1 ) == '}' ) {
+					data = JSON.parse( data )
+					if( data && data.screen_name !== undefined ) {
+						cb( data )
+					} else {
+						cb( false )
+					}
 				} else {
 					cb( false )
 				}
-			} else {
-				cb( false )
 			}
 		}
+		xhr.open( 'GET', 'https://api.twitter.com/1/users/show.json?screen_name='+ username +'&include_entities=false&dnt=true', true )
+		xhr.send()
+		
+	} else {
+		
+		// !Fetcher: Browser offline
+		cb({ screen_name: username })
+		
 	}
-	xhr.open( 'GET', 'https://api.twitter.com/1/users/show.json?screen_name='+ username +'&include_entities=false&dnt=true', true )
-	xhr.send()
 }
 
 // !Human numbers
