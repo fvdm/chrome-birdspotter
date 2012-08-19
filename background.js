@@ -8,6 +8,14 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		// !Done spotting
 		case 'doneSpotting':
 			
+			// !new tab, or tab changed URL
+			if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != request.href ) {
+				tabs[ 't'+ sender.tab.id ] = {
+					users: {},
+					href: request.href
+				}
+			}
+			
 			// any users found?
 			if( tabs[ 't'+ sender.tab.id ] && tabs[ 't'+ sender.tab.id ].users && Object.keys( tabs[ 't'+ sender.tab.id ].users ).length >= 1 ) {
 				

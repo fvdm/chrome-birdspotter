@@ -64,7 +64,8 @@ function taskDone() {
 	todo--
 	if( todo == 0 ) {
 		chrome.extension.sendRequest({
-			action: 'doneSpotting'
+			action: 'doneSpotting',
+			href:   document.location.href
 		})
 	}
 }
