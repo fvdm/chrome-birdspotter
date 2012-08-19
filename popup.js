@@ -62,7 +62,7 @@ chrome.tabs.query(
 				} else {
 					
 					// !Browser offline
-					document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and follow buttons are not visible because your browser is offline.">browser offline</div><ul id="list"></ul>'
+					document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and details are not available because your browser is offline.">browser offline</div><ul id="list"></ul>'
 					for( var u in response.users ) {
 						
 						var bird = response.users[u],
