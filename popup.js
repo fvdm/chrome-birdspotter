@@ -33,7 +33,7 @@ chrome.tabs.query(
 						screennameDiv = document.createElement('div'),
 						screennameLink = document.createElement('a')
 						
-						avatarImage.src = bird.profile_image_url_https
+						avatarImage.src = bird.profile_image_url_https +'?dnt=true'
 						avatarLink.target = '_blank'
 						avatarLink.href = 'https://twitter.com/'+ bird.screen_name
 						avatarLink.appendChild( avatarImage )
