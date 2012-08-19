@@ -29,7 +29,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 							description:			bird.description,
 							protected:			bird.protected,
 							followers_count:		bird.followers_count,
-							friends_cound:			bird.friends_count,
+							friends_count:			bird.friends_count,
 							created_at:			bird.created_at,
 							utc_offset:			bird.utc_offset,
 							verified:			bird.verified,
