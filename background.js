@@ -11,14 +11,36 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			// !new tab, or tab changed URL
 			if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != request.href ) {
 				tabs[ 't'+ sender.tab.id ] = {
-					users: [],
+					users: {},
 					href: request.href
 				}
 			}
 			
 			// !add to users
-			if( !inArray( request.user, tabs[ 't'+ sender.tab.id ].users ) ) {
-				tabs[ 't'+ sender.tab.id ].users.push( request.user )
+			if( tabs[ 't'+ sender.tab.id ].users[ request.user ] === undefined ) {
+				twitter_user( request.user, function( bird ) {
+					if( bird.screen_name !== undefined ) {
+						tabs[ 't'+ sender.tab.id ].users[ request.user.toLowerCase() ] = {
+							screen_name:			bird.screen_name,
+							id_str:				bird.id_str,
+							name:				bird.name,
+							location:			bird.location,
+							url:				bird.url,
+							description:			bird.description,
+							protected:			bird.protected,
+							followers_count:		bird.followers_count,
+							friends_cound:			bird.friends_count,
+							created_at:			bird.created_at,
+							utc_offset:			bird.utc_offset,
+							verified:			bird.verified,
+							statuses_count:			bird.statuses_count,
+							lang:				bird.lang,
+							profile_image_url_https:	bird.profile_image_url_https,
+							following:			bird.following,
+							follow_request_sent:		bird.follow_request_sent
+						}
+					}
+				})
 			}
 			
 			// !display icon
@@ -45,14 +67,19 @@ chrome.tabs.onRemoved.addListener( function( tabId, removeInfo ) {
 	}
 })
 
-// !inArray
-function inArray( needle, haystack ) {
-	if( haystack.length && haystack.length >= 1 ) {
-		for( var n in haystack ) {
-			if( haystack[n] == needle ) {
-				return true
+// Get user from Twitter API
+function twitter_user( username, cb ) {
+	var xhr = new XMLHttpRequest()
+	xhr.onreadystatechange = function() {
+		if( xhr.readyState == 4 ) {
+			var data = xhr.responseText.trim()
+			if( data.length >= 2 && data.substr(0,1) == '{' && data.substr( data.length -1, 1 ) == '}' ) {
+				data = JSON.parse( data )
+				console.log( 'User '+ username +': ', data )
+				cb( data )
 			}
 		}
 	}
-	return false
+	xhr.open("GET", 'https://api.twitter.com/1/users/show.json?screen_name='+ username +'&include_entities=false', true)
+	xhr.send()
 }
