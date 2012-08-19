@@ -26,26 +26,19 @@ chrome.tabs.query(
 						
 						var bird = response.users[u],
 						li = document.createElement('li'),
+						link = document.createElement('a'),
 						avatarDiv = document.createElement('div'),
-						avatarLink = document.createElement('a'),
 						avatarImage = document.createElement('img'),
 						nameDiv = document.createElement('div'),
 						screennameDiv = document.createElement('div'),
-						screennameLink = document.createElement('a'),
 						detailsDiv = document.createElement('div')
 						
 						avatarImage.src = bird.profile_image_url_https +'?dnt=true'
-						avatarLink.target = '_blank'
-						avatarLink.href = 'https://twitter.com/'+ bird.screen_name
-						avatarLink.appendChild( avatarImage )
 						avatarDiv.className = 'avatar'
-						avatarDiv.appendChild( avatarLink )
+						avatarDiv.appendChild( avatarImage )
 											
-						screennameLink.target = '_blank'
-						screennameLink.href = 'https://twitter.com/'+ bird.screen_name
-						screennameLink.innerHTML = bird.screen_name
 						screennameDiv.className = 'screenname'
-						screennameDiv.appendChild( screennameLink )
+						screennameDiv.innerHTML = bird.screen_name
 						
 						detailsDiv.className = 'details'
 						detailsDiv.innerHTML = bird.followers_count_human +' followers<br>'+ bird.description.substr(0,100)
@@ -54,9 +47,14 @@ chrome.tabs.query(
 						nameDiv.appendChild( screennameDiv )
 						nameDiv.appendChild( detailsDiv )
 						
+						link.href = 'https://twitter.com/'+ bird.screen_name
+						link.target = '_blank'
+						link.appendChild( avatarDiv )
+						link.appendChild( nameDiv )
+						
 						li.className = 'itemOnline'
-						li.appendChild( avatarDiv )
-						li.appendChild( nameDiv )
+						li.appendChild( link )
+						
 						document.getElementById('list').appendChild( li )
 						
 					}
