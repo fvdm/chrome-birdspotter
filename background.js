@@ -3,18 +3,19 @@ var tabs = {}
 
 // !Incoming request
 chrome.extension.onRequest.addListener( function( request, sender, response ) {
+	
+	// !new tab, or tab changed URL
+	if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != sender.tab.url ) {
+		tabs[ 't'+ sender.tab.id ] = {
+			users: {},
+			href: sender.tab.url
+		}
+	}
+	
 	switch( request.action ) {
 		
 		// !Done spotting
 		case 'doneSpotting':
-			
-			// !new tab, or tab changed URL
-			if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != request.href ) {
-				tabs[ 't'+ sender.tab.id ] = {
-					users: {},
-					href: request.href
-				}
-			}
 			
 			// any users found?
 			if( tabs[ 't'+ sender.tab.id ] && tabs[ 't'+ sender.tab.id ].users && Object.keys( tabs[ 't'+ sender.tab.id ].users ).length >= 1 ) {
@@ -31,20 +32,11 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 				})
 			}
 			
-			
 			response({ status: 'ok' })
 			break
 		
 		// !Bird spotted
 		case 'twitterUser':
-			
-			// !new tab, or tab changed URL
-			if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != request.href ) {
-				tabs[ 't'+ sender.tab.id ] = {
-					users: {},
-					href: request.href
-				}
-			}
 			
 			// !add to users
 			var username = request.user.toLowerCase()
@@ -65,6 +57,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			break
 		
 	}
+
 })
 
 // !Tab closed
