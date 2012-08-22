@@ -29,7 +29,7 @@ chrome.tabs.query(
 						link = document.createElement('a'),
 						avatarDiv = document.createElement('div'),
 						avatarImage = document.createElement('img'),
-						nameDiv = document.createElement('div'),
+						infoDiv = document.createElement('div'),
 						screennameDiv = document.createElement('div'),
 						detailsDiv = document.createElement('div')
 						
@@ -43,19 +43,15 @@ chrome.tabs.query(
 						detailsDiv.className = 'details'
 						detailsDiv.innerHTML = bird.followers_count_human +' followers<br>'+ bird.description.substr(0,100)
 						
-						nameDiv.className = 'name'
-						nameDiv.appendChild( screennameDiv )
-						nameDiv.appendChild( detailsDiv )
-						
-						link.setAttribute( 'data-username', bird.screen_name )
-						link.href = 'https://twitter.com/'+ bird.screen_name
-						link.target = '_blank'
-						link.onclick = displayIntent
-						link.appendChild( avatarDiv )
-						link.appendChild( nameDiv )
+						infoDiv.className = 'info'
+						infoDiv.appendChild( screennameDiv )
+						infoDiv.appendChild( detailsDiv )
 						
 						li.className = 'itemOnline'
-						li.appendChild( link )
+						li.setAttribute( 'data-username', bird.screen_name )
+						li.onclick = displayIntent
+						li.appendChild( avatarDiv )
+						li.appendChild( infoDiv )
 						
 						document.getElementById('list').appendChild( li )
 						
