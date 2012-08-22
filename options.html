@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Bird Spotter - Options</title>
+	</head>
+	<body>
+		<div id="wrap">
+			<h1>Bird Spotter - Options</h1>
+			<table>
+				<tr>
+					<td>Display avatars</td>
+					<td><input type="checkbox" name="avatars" id="prefavatars"></td>
+				</tr>
+				<tr>
+					<td>Load user data</td>
+					<td><input type="checkbox" name="apilookup" id="prefapilookup"></td>
+				</tr>
+				<tr>
+					<td>Enable Do-Not-Track</td>
+					<td><input type="checkbox" name="dnt" id="prefdnt"></td>
+				</tr>
+				<tr>
+					<td>Enable HTTPS</td>
+					<td><input type="checkbox" name="https" id="prefhttps"></td>
+				</tr>
+				<tr>
+					<td>On clicking a user:</td>
+					<td>
+						<select name="onclick" size="1" id="prefonlick">
+							<option value="intent">display summary (intent)</option>
+							<option value="newtab">display profile in new tab</option>
+							<option value="custom">open custom URL</option>
+							<option value="nothing">do nothin</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript" src="options.js"></script>
+	</body>
+</html>

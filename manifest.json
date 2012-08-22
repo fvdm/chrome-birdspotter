@@ -21,12 +21,14 @@
 		"run_at":		"document_idle",
 		"js":			["bird_spotter.js"]
 	}],
+	"options_page":			"options.html",
 	"page_action": {
 		"default_icon":		"icons/twitter-bird-light-bgs.png",
 		"default_title":	"Bird Spotter",
 		"default_popup":	"popup.html"
 	},
 	"permissions": [
+		"storage",
 		"tabs",
 		"https://*.twitter.com/*",
 		"https://twitter.com/*"
