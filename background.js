@@ -72,26 +72,29 @@ function fetch_bird( usernames, cb ) {
 	if( navigator.onLine ) {
 		
 		// !Fetcher: Browser online
+		// commented lines are not used atm, saves memory
 		http_request( usernames, function( bird ) {
 			cb({
 				screen_name:			bird.screen_name,
 				id_str:				bird.id_str,
-				name:				bird.name,
-				location:			bird.location,
-				url:				bird.url,
+//				name:				bird.name,
+//				location:			bird.location,
+//				url:				bird.url,
 				description:			bird.description,
-				protected:			bird.protected,
+//				protected:			bird.protected,
 				followers_count:		bird.followers_count,
 				followers_count_human:		human_number( bird.followers_count ),
-				friends_count:			bird.friends_count,
-				created_at:			bird.created_at,
-				utc_offset:			bird.utc_offset,
-				verified:			bird.verified,
-				statuses_count:			bird.statuses_count,
-				lang:				bird.lang,
+//				friends_count:			bird.friends_count,
+//				friends_count_human:		human_number( bird.friends_count ),
+//				created_at:			bird.created_at,
+//				utc_offset:			bird.utc_offset,
+//				verified:			bird.verified,
+//				statuses_count:			bird.statuses_count,
+//				statuses_count_human:		human_number( bird.statuses_count ),
+//				lang:				bird.lang,
 				profile_image_url_https:	bird.profile_image_url_https,
-				following:			bird.following,
-				follow_request_sent:		bird.follow_request_sent
+//				following:			bird.following,
+//				follow_request_sent:		bird.follow_request_sent
 			})
 		})
 		
