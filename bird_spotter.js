@@ -6,7 +6,7 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
 		var link = document.links[l]
 		if( link.href ) {
-			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)(\?|\/)?/i, function( str, www, hash, username ) {
+			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)(\?|\/|$)/i, function( str, www, hash, username ) {
 				if( !username.match( /^(home|intent|share|jobs|tos|privacy|images|settings|about|i|download|activity|who_to_follow|search|invitations)$/i ) ) {
 					foundUser( username )
 				}
@@ -27,8 +27,8 @@ if( document.head.children && document.head.children.length >= 1 ) {
 	for( var m in document.head.children ) {
 		var tag = document.head.children[m]
 		if( tag.nodeName == 'META' ) {
-			if( tag.outerHTML.match( /(name|property)=['"]twitter:creator['"]/i ) ) {
-				tag.outerHTML.replace( /(content|value)=['"]([^'"]+)['"]/i, function( s, k, user ) {
+			if( tag.outerHTML.match( /\b(name|property)=['"]twitter:creator['"]/i ) ) {
+				tag.outerHTML.replace( /\b(content|value)=['"]([^'"]+)['"]/i, function( s, k, user ) {
 					foundUser( user )
 				})
 			}
@@ -45,7 +45,7 @@ if( document.location.host != 'twitter.com' && document.scripts && document.scri
 			script.src.replace( /\/statuses\/user_timeline\/([^\.]+)\./i, function( s, user ) {
 				foundUser( user )
 			})
-			script.src.replace( /\&screen_name=([^\&]+)\&/i, function( s, user ) {
+			script.src.replace( /\bscreen_name=([^\&]+)\&/i, function( s, user ) {
 				foundUser( user )
 			})
 		}
