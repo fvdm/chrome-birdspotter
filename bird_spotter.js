@@ -1,6 +1,3 @@
-// !Count todo
-var todo = 3
-
 // !Parse links
 if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
@@ -19,7 +16,6 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 			})
 		}
 	}
-	taskDone()
 }
 
 // !Parse meta tags
@@ -34,7 +30,6 @@ if( document.head.children && document.head.children.length >= 1 ) {
 			}
 		}
 	}
-	taskDone()
 }
 
 // !Parse widgets
@@ -50,7 +45,6 @@ if( document.location.host != 'twitter.com' && document.scripts && document.scri
 			})
 		}
 	}
-	taskDone()
 }
 
 // !Found a user
@@ -62,12 +56,4 @@ function foundUser( username ) {
 }
 
 // !Task done
-function taskDone() {
-	todo--
-	if( todo == 0 ) {
-		chrome.extension.sendRequest({
-			action: 'doneSpotting',
-			href:   document.location.href
-		})
-	}
-}
+chrome.extension.sendRequest({ action: 'doneSpotting' })
