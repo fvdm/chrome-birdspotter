@@ -1,55 +1,71 @@
 var prefs = {}
+var defaults = {
+	avatars:	true,
+	apilookup:	true,
+	dnt:		true,
+	https:		true,
+	onclick:	0	// intent
+}
 
-// save a pref
-function savePref() {
-	prefs[ this.name ] = this.checked
-	chrome.storage.sync.set( {options: prefs}, function() {
-		// saved
+function loadOptions() {
+	chrome.storage.sync.get( 'options', function( res ) {
+		prefs = res.options || defaults
+		for( var id in prefs ) {
+			itmValue( id, prefs[id] )
+		}
 	})
 }
 
-// load prefs
-function loadPrefs() {
-	chrome.storage.sync.get( 'options', function( options ) {
-		prefs = options.options || {}
-		for( var name in prefs ) {
-			var value = prefs[name]
-			var itm = document.getElementById('pref'+ name)
-			if( itm.type == 'checkbox' ) {
+function saveOption() {
+	prefs[ this.id ] = itmValue( this.id )
+	chrome.storage.sync.set( {options: prefs}, function() {})
+}
+
+// change item
+function itmValue( id, value ) {
+	var itm = document.getElementById( id )
+	if( itm ) {
+		if( value !== undefined ) {
+			// SET value
+			if( itm.type && itm.type == 'checkbox' ) {
 				itm.checked = value
 			} else if( itm.tagName == 'SELECT' ) {
-				itm.value = value
+				itm.selectedIndex = value
+			}
+		} else {
+			// GET value
+			if( itm.type && itm.type == 'checkbox' ) {
+				var value = itm.checked
+			} else if( itm.tagName == 'SELECT' ) {
+				var value = itm.selectedIndex
 			}
 		}
-	})
+	}
+	return value || null
 }
 
-// first time
-//chrome.storage.sync.clear()
-loadPrefs()
-
-// prefs update somewhere else
-chrome.storage.onChanged.addListener( function( changes, ns ) {
-	for( var name in changes.oldValue ) {
-		if( changes.newValue[ name ] === undefined ) {
-			delete prefs[ name ]
-		} else {
-			prefs[ name ] = changes.newValue[ name ]
-		}
-	}
-})
-
-// user changed something
+// watch for changes
 var inputs = document.getElementsByTagName('input')
-for( var i in inputs ) {
-	if( typeof inputs[i] == 'object' ) {
-		inputs[i].addEventListener( 'change', savePref )
+if( inputs.length >= 1 ) {
+	for( var i in inputs ) {
+		if( typeof inputs[i] == 'object' ) {
+			inputs[i].addEventListener( 'change', saveOption )
+		}
 	}
 }
 
 var selects = document.getElementsByTagName('select')
-for( var i in selects ) {
-	if( typeof selects[i] == 'object' ) {
-		selects[i].addEventListener( 'change', savePref )
+if( selects.length >= 1 ) {
+	for( var s in selects ) {
+		if( typeof selects[s] == 'object' ) {
+			selects[s].addEventListener( 'change', saveOption )
+		}
 	}
 }
+
+chrome.storage.onChanged.addListener( function() {
+	loadOptions()
+})
+
+// First load
+loadOptions()

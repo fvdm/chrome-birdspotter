@@ -3,40 +3,51 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Bird Spotter - Options</title>
+		<style type="text/css">
+			.note {
+				font-size: 11px;
+				color: #777;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="wrap">
 			<h1>Bird Spotter - Options</h1>
 			<table>
 				<tr>
-					<td>Display avatars</td>
-					<td><input type="checkbox" name="avatars" id="prefavatars"></td>
+					<td valign="baseline">Display avatars</td>
+					<td valign="baseline"><input type="checkbox" name="avatars" id="avatars"></td>
+					<td valign="baseline" id="avatarsStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Load user data</td>
-					<td><input type="checkbox" name="apilookup" id="prefapilookup"></td>
+					<td valign="baseline">Load user details<br><span class="note">(API call, avatars will load slower)</span></td>
+					<td valign="baseline"><input type="checkbox" name="apilookup" id="apilookup"></td>
+					<td valign="baseline" id="apilookupStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Enable Do-Not-Track</td>
-					<td><input type="checkbox" name="dnt" id="prefdnt"></td>
+					<td valign="baseline">Enable Do-Not-Track</td>
+					<td valign="baseline"><input type="checkbox" name="dnt" id="dnt"></td>
+					<td valign="baseline" id="dntStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Enable HTTPS</td>
-					<td><input type="checkbox" name="https" id="prefhttps"></td>
+					<td valign="baseline">Enable HTTPS</td>
+					<td valign="baseline"><input type="checkbox" name="https" id="https"></td>
+					<td valign="baseline" id="httpsStatus">&nbsp;</td>
 				</tr>
 				<tr>
 					<td>On clicking a user:</td>
 					<td>
-						<select name="onclick" size="1" id="prefonlick">
+						<select name="onclick" size="1" id="onlick">
 							<option value="intent">display summary (intent)</option>
 							<option value="newtab">display profile in new tab</option>
 							<option value="custom">open custom URL</option>
 							<option value="nothing">do nothin</option>
 						</select>
 					</td>
-				</tr>
+					<td id="onclickStatus">&nbsp;</td>
+				</tr>	   
 			</table>
 		</div>
-		<script type="text/javascript" src="options.js"></script>
 	</body>
+	<script type="text/javascript" src="options.js"></script>
 </html>
