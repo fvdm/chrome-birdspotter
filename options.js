@@ -26,14 +26,18 @@ function itmValue( id, value ) {
 			if( itm.type && itm.type == 'checkbox' ) {
 				itm.checked = value
 			} else if( itm.tagName == 'SELECT' ) {
-				itm.selectedIndex = value
+				for( var o in itm.options ) {
+					if( itm.options[o].value == value ) {
+						itm.selectedIndex = o
+					}
+				}
 			}
 		} else {
 			// GET value
 			if( itm.type && itm.type == 'checkbox' ) {
 				var value = itm.checked
 			} else if( itm.tagName == 'SELECT' ) {
-				var value = itm.selectedIndex
+				var value = itm.options[ itm.selectedIndex ].value
 			}
 		}
 	}
