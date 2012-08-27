@@ -24,55 +24,95 @@
 	#list {
 		padding: 0;
 		list-style: none;
+		-webkit-user-select: none;
 	}
 	
-		#list li {
-			padding: 0;
-			margin: 0 0 10px 0;
-			-webkit-user-select: none;
+		/* !Item */
+		li {
+			overflow: hidden;
 		}
 		
-			#list li:hover {
-				background-color: #f0f0f0;
-				cursor: pointer;
-			}
-			
-			#list .itemOnline {
-				width: 230px;
-				height: 50px;
-			}
-			
-			#list .itemOffline {
-				width: 200px;
-				height: 20px;
-			}
+		li:hover {
+			background-color: #f0f0f0;
+			cursor: pointer;
+		}
 		
-			#list .avatar {
-				float: left;
-				width: 58px;
-				height: 48px;
-			}
+		li img {
+			float: left;
+			height: inherit;
+			width: auto;
+			margin-right: 5px;
+		}
 			
-			#list .info {
-				float: left;
-				width: 165px;
-				overflow: hidden;
-			}
-			
-				#list .screenname {
-					height: 22px;
-					font-size: 14px;
-					font-weight: bold;
-				}
-				
-				#list .details {
-					width: 165px;
-					height: 24px;
-					font-size: 10px;
-					color: #999;
-					overflow-y: hidden;
-					overflow-x: hidden;
-				}
+		li .name {
+			position: relative;
+			float: none;
+			height: 22px;
+			margin-left: 5px;
+			font-size: 14px;
+			font-weight: bold;
+			overflow: hidden;
+		}
+		
+		li .info {
+			position: relative;
+			float: none;
+			margin-left: 5px;
+			font-size: 10px;
+			color: #999;
+			overflow: hidden;
+		}
+		
+		
+		/* !Style - Fancy */
+		.fancy li {
+			height: 48px;
+			width: 230px;
+			margin-bottom: 10px;
+		}
+		
+		.fancy img { display: block; }
+		.fancy .info { display: block; }
+		
+		
+		/* !Style - Easy */
+		.easy li {
+			height: 20px;
+			width: 200px;
+			margin-bottom: 8px;
+		}
+		
+		.easy img { display: block; }
+		.easy .info { display: none; }
+		
+		
+		/* !Style - Boring */
+		.boring li {
+			height: 48px;
+			width: 180px;
+			margin-bottom: 10px;
+		}
+		
+		.boring img { display: none; }
+		.boring .info { display: block; }
+		
+		
+		/* !Style - Light */
+		.light li {
+			height: 20px;
+			width: 180px;
+			margin-bottom: 5px;
+		}
+		
+		.light img { display: none; }
+		.light .info { display: none; }
+		
+		
+		/* !Global overrides */
+		li:last-child {
+			margin-bottom: 0;
+		}
+
 </style>
 <div id="wrap">
 	<img src="icons/ajax-loader.gif">

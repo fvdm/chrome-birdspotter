@@ -1,5 +1,41 @@
 var prefs = {}
 
+function buildUser( bird ) {
+	console.log( bird )
+	var proto = prefs.https ? 'https:' : 'http:'
+	var li = document.createElement('li')
+	li.setAttribute( 'data-username', bird.screen_name )
+	li.onclick = openUser
+	
+	// avatar
+	if( prefs.avatars ) {
+		var avatar = document.createElement('img')
+		if( bird.profile_image_url !== undefined ) {
+			avatar.src = (prefs.https ? bird.profile_image_url_https : bird.profile_image_url) + (prefs.dnt ? '?dnt=true' : '')
+		} else {
+			avatar.src = proto +'//api.twitter.com/1/users/profile_image?screen_name='+ bird.screen_name +'&size=normal'+ (prefs.dnt ? '&dnt=true' : '')
+		}
+		li.appendChild( avatar )
+	}
+	
+	// screen_name
+	var name = document.createElement('div')
+	name.className = 'name'
+	name.innerHTML = bird.screen_name
+	li.appendChild( name )
+	
+	// details
+	if( prefs.apilookup && bird.description !== undefined ) {
+		var info = document.createElement('div')
+		info.className = 'info'
+		info.innerHTML = bird.followers_count_human +' followers<br>'+ bird.description.substr(0,100)
+		li.appendChild( info )
+	}
+	
+	// add to list
+	document.getElementById('list').appendChild( li )
+}
+
 // find current tab
 chrome.tabs.query(
 	{
@@ -23,79 +59,29 @@ chrome.tabs.query(
 				},
 				function( response ) {
 					
-					// !Check network
 					if( navigator.onLine ) {
-						
-						var proto = prefs.https ? 'https:' : 'http:'
-						
-						// !Browser online
-						document.getElementById('wrap').innerHTML = '<ul id="list"></ul>'
-						for( var u in response.users ) {
-							
-							console.log( prefs )
-							
-							var bird = response.users[u],
-							li = document.createElement('li'),
-							link = document.createElement('a'),
-							avatarDiv = document.createElement('div'),
-							avatarImage = document.createElement('img'),
-							infoDiv = document.createElement('div'),
-							screennameDiv = document.createElement('div'),
-							detailsDiv = document.createElement('div')
-							
-							screennameDiv.className = 'screenname'
-							screennameDiv.innerHTML = bird.screen_name
-							
-							infoDiv.className = 'info'
-							infoDiv.appendChild( screennameDiv )
-							
-							if( prefs.apilookup && bird.description ) {
-								detailsDiv.className = 'details'
-								detailsDiv.innerHTML = bird.followers_count_human +' followers<br>'+ bird.description.substr(0,100)
-								infoDiv.appendChild( detailsDiv )
-							}
-							
-							li.className = 'itemOnline'
-							li.setAttribute( 'data-username', bird.screen_name )
-							li.setAttribute( 'data-click', prefs.click )
-							li.onclick = openUser
-							
-							if( prefs.avatars ) {
-								if( bird.profile_image_url ) {
-									avatarImage.src = (prefs.https ? bird.profile_image_url_https : profile_image_url) + (prefs.dnt ? '?dnt=true' : '')
-								} else {
-									avatarImage.src = proto +'//api.twitter.com/1/users/profile_image?screen_name='+ bird.screen_name +'&size=normal'+ (prefs.dnt ? '&dnt=true' : '')
-								}
-								avatarDiv.className = 'avatar'
-								avatarDiv.appendChild( avatarImage )
-								li.appendChild( avatarDiv )
-							}
-							
-							li.appendChild( infoDiv )
-							document.getElementById('list').appendChild( li )
-							
+						if( prefs.avatars && prefs.apilookup ) {
+							var style = 'fancy'
+						} else if( prefs.avatars && !prefs.apilookup ) {
+							var style = 'easy'
+						} else if( !prefs.avatars && prefs.apilookup ) {
+							var style = 'boring'
+						} else if( !prefs.avatars && !prefs.apilookup ) {
+							var style = 'light'
 						}
+						
+						document.getElementById('wrap').innerHTML = '<ul id="list" class="'+ style +'"></ul>'
 						
 					} else {
-						
+					
 						// !Browser offline
-						document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and details are not available because your browser is offline.">browser offline</div><ul id="list"></ul>'
-						for( var u in response.users ) {
-							
-							var bird = response.users[u],
-							li = document.createElement('li'),
-							screennameLink = document.createElement('a')
-							
-							screennameLink.target = '_blank'
-							screennameLink.href = proto +'//twitter.com/'+ bird.screen_name
-							screennameLink.className = 'screenname'
-							screennameLink.innerHTML = bird.screen_name
-							
-							li.className = 'itemOffline'
-							li.appendChild( screennameLink )
-							document.getElementById('list').appendChild( li )
-						}
+						document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and details are not available because your browser is offline.">browser offline</div><ul id="list" class="light"></ul>'
 						
+					}
+					
+					// !Iterate users
+					for( var u in response.users ) {
+						buildUser( response.users[u] )
 					}
 					
 				}
@@ -105,11 +91,10 @@ chrome.tabs.query(
 )
 
 function openUser() {
-	var click = this.getAttribute('data-click')
 	var proto = prefs.https ? 'https:' : 'http:'
 	var dnt = prefs.dnt ? '&dnt=true' : ''
 	
-	switch( click ) {
+	switch( prefs.click ) {
 		
 		case 'intent':
 			var left = parseInt( (screen.availWidth / 2) - 250 )
@@ -118,7 +103,6 @@ function openUser() {
 			break
 			
 		case 'newtab':
-			console.log( proto +'//twitter.com/'+ this.getAttribute('data-username') )
 			window.open( proto +'//twitter.com/'+ this.getAttribute('data-username'), '_blank' )
 			break
 			
