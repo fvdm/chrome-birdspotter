@@ -126,34 +126,47 @@ function apiLimit( cb ) {
 
 // !Get user from Twitter API
 function fetch_bird( usernames, cb ) {
-	if( navigator.onLine ) {
+	if( navigator.onLine && prefs.apilookup ) {
 		
-		// !Fetcher: Browser online
-		// commented lines are not used atm, saves memory
-		http_request( usernames, function( bird ) {
-			cb({
-				screen_name:			bird.screen_name,
-				id_str:				bird.id_str,
-				name:				bird.name,
-//				location:			bird.location,
-//				url:				bird.url,
-				description:			bird.description,
-//				protected:			bird.protected,
-				followers_count:		bird.followers_count,
-				followers_count_human:		human_number( bird.followers_count ),
-//				friends_count:			bird.friends_count,
-//				friends_count_human:		human_number( bird.friends_count ),
-//				created_at:			bird.created_at,
-//				utc_offset:			bird.utc_offset,
-//				verified:			bird.verified,
-//				statuses_count:			bird.statuses_count,
-//				statuses_count_human:		human_number( bird.statuses_count ),
-//				lang:				bird.lang,
-				profile_image_url:		bird.profile_image_url || '',
-				profile_image_url_https:	bird.profile_image_url_https,
-//				following:			bird.following,
-//				follow_request_sent:		bird.follow_request_sent
-			})
+		apiLimit( function( limit ) {
+			if( limit.remaining_hits >= 1 ) {
+				
+				// !Fetcher: Browser online
+				// commented lines are not used atm, saves memory
+				http_request( usernames, function( bird ) {
+					cb({
+						screen_name:			bird.screen_name,
+						id_str:				bird.id_str,
+						name:				bird.name,
+		//				location:			bird.location,
+		//				url:				bird.url,
+						description:			bird.description,
+		//				protected:			bird.protected,
+						followers_count:		bird.followers_count,
+						followers_count_human:		human_number( bird.followers_count ),
+		//				friends_count:			bird.friends_count,
+		//				friends_count_human:		human_number( bird.friends_count ),
+		//				created_at:			bird.created_at,
+		//				utc_offset:			bird.utc_offset,
+		//				verified:			bird.verified,
+		//				statuses_count:			bird.statuses_count,
+		//				statuses_count_human:		human_number( bird.statuses_count ),
+		//				lang:				bird.lang,
+						profile_image_url_https:	bird.profile_image_url_https,
+		//				following:			bird.following,
+		//				follow_request_sent:		bird.follow_request_sent
+					})
+				})
+			
+			} else {
+				
+				// !Fetcher: API Limit reached
+				usernames = usernames.split(',')
+				for( var u in usernames ) {
+					cb({ screen_name: usernames[u] })
+				}
+				
+			}
 		})
 		
 	} else {
