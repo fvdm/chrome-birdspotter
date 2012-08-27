@@ -23,61 +23,79 @@ chrome.tabs.query(
 				},
 				function( response ) {
 					
-					// !Browser online
-					document.getElementById('wrap').innerHTML = '<ul id="list"></ul>'
-					for( var u in response.users ) {
+					// !Check network
+					if( navigator.onLine ) {
 						
-						var bird = response.users[u],
-						li = document.createElement('li'),
-						link = document.createElement('a'),
-						avatarDiv = document.createElement('div'),
-						avatarImage = document.createElement('img'),
-						infoDiv = document.createElement('div'),
-						screennameDiv = document.createElement('div'),
-						detailsDiv = document.createElement('div')
+						var proto = prefs.https ? 'https:' : 'http:'
 						
-						avatarImage.src = bird.profile_image_url_https +'?dnt=true'
-						avatarDiv.className = 'avatar'
-						avatarDiv.appendChild( avatarImage )
-											
-						screennameDiv.className = 'screenname'
-						screennameDiv.innerHTML = bird.screen_name
+						// !Browser online
+						document.getElementById('wrap').innerHTML = '<ul id="list"></ul>'
+						for( var u in response.users ) {
+							
+							console.log( prefs )
+							
+							var bird = response.users[u],
+							li = document.createElement('li'),
+							link = document.createElement('a'),
+							avatarDiv = document.createElement('div'),
+							avatarImage = document.createElement('img'),
+							infoDiv = document.createElement('div'),
+							screennameDiv = document.createElement('div'),
+							detailsDiv = document.createElement('div')
+							
+							screennameDiv.className = 'screenname'
+							screennameDiv.innerHTML = bird.screen_name
+							
+							infoDiv.className = 'info'
+							infoDiv.appendChild( screennameDiv )
+							
+							if( prefs.apilookup && bird.description ) {
+								detailsDiv.className = 'details'
+								detailsDiv.innerHTML = bird.followers_count_human +' followers<br>'+ bird.description.substr(0,100)
+								infoDiv.appendChild( detailsDiv )
+							}
+							
+							li.className = 'itemOnline'
+							li.setAttribute( 'data-username', bird.screen_name )
+							li.setAttribute( 'data-click', prefs.click )
+							li.onclick = openUser
+							
+							if( prefs.avatars ) {
+								if( bird.profile_image_url ) {
+									avatarImage.src = (prefs.https ? bird.profile_image_url_https : profile_image_url) + (prefs.dnt ? '?dnt=true' : '')
+								} else {
+									avatarImage.src = proto +'//api.twitter.com/1/users/profile_image?screen_name='+ bird.screen_name +'&size=normal'+ (prefs.dnt ? '&dnt=true' : '')
+								}
+								avatarDiv.className = 'avatar'
+								avatarDiv.appendChild( avatarImage )
+								li.appendChild( avatarDiv )
+							}
+							
+							li.appendChild( infoDiv )
+							document.getElementById('list').appendChild( li )
+							
+						}
 						
-						detailsDiv.className = 'details'
-						detailsDiv.innerHTML = bird.followers_count_human +' followers<br>'+ bird.description.substr(0,100)
+					} else {
 						
-						infoDiv.className = 'info'
-						infoDiv.appendChild( screennameDiv )
-						infoDiv.appendChild( detailsDiv )
+						// !Browser offline
+						document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and details are not available because your browser is offline.">browser offline</div><ul id="list"></ul>'
+						for( var u in response.users ) {
+							
+							var bird = response.users[u],
+							li = document.createElement('li'),
+							screennameLink = document.createElement('a')
+							
+							screennameLink.target = '_blank'
+							screennameLink.href = proto +'//twitter.com/'+ bird.screen_name
+							screennameLink.className = 'screenname'
+							screennameLink.innerHTML = bird.screen_name
+							
+							li.className = 'itemOffline'
+							li.appendChild( screennameLink )
+							document.getElementById('list').appendChild( li )
+						}
 						
-						li.className = 'itemOnline'
-						li.setAttribute( 'data-username', bird.screen_name )
-						li.onclick = displayIntent
-						li.appendChild( avatarDiv )
-						li.appendChild( infoDiv )
-						
-						document.getElementById('list').appendChild( li )
-						
-					}
-					
-				} else {
-					
-					// !Browser offline
-					document.getElementById('wrap').innerHTML = '<div id="offline" title="User avatars and details are not available because your browser is offline.">browser offline</div><ul id="list"></ul>'
-					for( var u in response.users ) {
-						
-						var bird = response.users[u],
-						li = document.createElement('li'),
-						screennameLink = document.createElement('a')
-						
-						screennameLink.target = '_blank'
-						screennameLink.href = 'https://twitter.com/'+ bird.screen_name
-						screennameLink.className = 'screenname'
-						screennameLink.innerHTML = bird.screen_name
-						
-						li.className = 'itemOffline'
-						li.appendChild( screennameLink )
-						document.getElementById('list').appendChild( li )
 					}
 					
 				}
