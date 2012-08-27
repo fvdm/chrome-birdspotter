@@ -1,3 +1,5 @@
+var prefs = {}
+
 // find current tab
 chrome.tabs.query(
 	{
@@ -9,16 +11,17 @@ chrome.tabs.query(
 		// found it
 		var tab = tabs[0]
 		
-		// !Get Twitter users from this tab
-		chrome.extension.sendRequest(
-			{
-				action: 'getUsers',
-				tabId:	tab.id
-			},
-			function( response ) {
-				
-				// !Check network
-				if( navigator.onLine ) {
+		// !Get options
+		chrome.extension.sendRequest( {action: 'getOptions'}, function( res ) {
+			prefs = res.options
+			
+			// !Get Twitter users from this tab
+			chrome.extension.sendRequest(
+				{
+					action: 'getUsers',
+					tabId:	tab.id
+				},
+				function( response ) {
 					
 					// !Browser online
 					document.getElementById('wrap').innerHTML = '<ul id="list"></ul>'
@@ -78,9 +81,8 @@ chrome.tabs.query(
 					}
 					
 				}
-				
-			}
-		)
+			)
+		})
 	}
 )
 
