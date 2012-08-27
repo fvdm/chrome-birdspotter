@@ -122,6 +122,7 @@ function fetch_bird( usernames, cb ) {
 //				statuses_count:			bird.statuses_count,
 //				statuses_count_human:		human_number( bird.statuses_count ),
 //				lang:				bird.lang,
+				profile_image_url:		bird.profile_image_url || '',
 				profile_image_url_https:	bird.profile_image_url_https,
 //				following:			bird.following,
 //				follow_request_sent:		bird.follow_request_sent
