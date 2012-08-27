@@ -2,7 +2,6 @@ var prefs = {}
 
 function buildUser( bird ) {
 	console.log( bird )
-	var proto = prefs.https ? 'https:' : 'http:'
 	var li = document.createElement('li')
 	li.setAttribute( 'data-username', bird.screen_name )
 	li.onclick = openUser
@@ -10,10 +9,10 @@ function buildUser( bird ) {
 	// avatar
 	if( prefs.avatars ) {
 		var avatar = document.createElement('img')
-		if( bird.profile_image_url !== undefined ) {
-			avatar.src = (prefs.https ? bird.profile_image_url_https : bird.profile_image_url) + (prefs.dnt ? '?dnt=true' : '')
+		if( bird.profile_image_url_https !== undefined ) {
+			avatar.src = bird.profile_image_url_https + (prefs.dnt ? '?dnt=true' : '')
 		} else {
-			avatar.src = proto +'//api.twitter.com/1/users/profile_image?screen_name='+ bird.screen_name +'&size=normal'+ (prefs.dnt ? '&dnt=true' : '')
+			avatar.src = 'https://api.twitter.com/1/users/profile_image?screen_name='+ bird.screen_name +'&size=normal'+ (prefs.dnt ? '&dnt=true' : '')
 		}
 		li.appendChild( avatar )
 	}
@@ -91,7 +90,6 @@ chrome.tabs.query(
 )
 
 function openUser() {
-	var proto = prefs.https ? 'https:' : 'http:'
 	var dnt = prefs.dnt ? '&dnt=true' : ''
 	
 	switch( prefs.click ) {
@@ -99,11 +97,11 @@ function openUser() {
 		case 'intent':
 			var left = parseInt( (screen.availWidth / 2) - 250 )
 			var top = parseInt( (screen.availHeight / 2) - 184 )
-			window.open( proto +'//twitter.com/intent/user?screen_name='+ this.getAttribute('data-username') + dnt, 'twitterIntent', 'width=500,height=368,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,screenX='+ left +',screenY='+ top )
+			window.open( 'https://twitter.com/intent/user?screen_name='+ this.getAttribute('data-username') + dnt, 'twitterIntent', 'width=500,height=368,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,screenX='+ left +',screenY='+ top )
 			break
 			
 		case 'newtab':
-			window.open( proto +'//twitter.com/'+ this.getAttribute('data-username'), '_blank' )
+			window.open( 'https://twitter.com/'+ this.getAttribute('data-username'), '_blank' )
 			break
 			
 		case 'custom':

@@ -5,7 +5,6 @@ var defaults = {
 	avatars:	true,
 	apilookup:	true,
 	dnt:		true,
-	https:		true,
 	click:		'intent',	// intent, tab, custom, nothing
 	custom_url:	'',
 	custom_target:	'_blank'
@@ -186,9 +185,8 @@ function http_request( usernames, cb ) {
 		}
 	}
 	
-	var protocol = prefs.https ? 'https:' : 'http:'
 	var dnt = prefs.dnt ? '&dnt=true' : ''
-	xhr.open( 'GET', protocol +'//api.twitter.com/1/users/lookup.json?screen_name='+ usernames +'&include_entities=false'+ dnt, true )
+	xhr.open( 'GET', 'https://api.twitter.com/1/users/lookup.json?screen_name='+ usernames +'&include_entities=false'+ dnt, true )
 	xhr.send()
 }
 
