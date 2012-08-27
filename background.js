@@ -34,16 +34,17 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			})
 			break;
 		
+		// !Options - GET
 		case 'getOptions':
-			chrome.storage.sync.get( 'options', function( res ) {
+			loadOptions( function( options ) {
 				response({
-					options: res.options || defaults,
+					options: options,
 					status: 'ok'
 				})
 			})
 			break
 			
-		// Options - UPDATE
+		// !Options - UPDATE
 		case 'setOptions':
 			chrome.storage.sync.set( {options: request.options}, function() {
 				response({
@@ -190,6 +191,23 @@ function http_request( usernames, cb ) {
 	xhr.open( 'GET', protocol +'//api.twitter.com/1/users/lookup.json?screen_name='+ usernames +'&include_entities=false'+ dnt, true )
 	xhr.send()
 }
+
+// !Load options
+function loadOptions( cb ) {
+	chrome.storage.sync.get( 'options', function( res ) {
+		prefs = res.options || defaults
+		if( typeof cb == 'function' ) {
+			cb( prefs )
+		}
+	})
+}
+
+chrome.storage.onChanged.addListener( function( ch, ns ) {
+	loadOptions()
+})
+
+// first load
+loadOptions()
 
 // !Human numbers
 function human_number( number ) {
