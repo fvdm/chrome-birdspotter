@@ -105,8 +105,8 @@ function openUser() {
 			break
 			
 		case 'custom':
-			var url = prefs.custom_url.replace( /\b\%u\b/, this.getAttribute('data-username') )
-			window.open( url, prefs.custom_target || '_blank' )
+			var url = prefs.customURL.replace( '{user}', this.getAttribute('data-username') )
+			window.open( url )
 			break
 			
 		case 'nothing':

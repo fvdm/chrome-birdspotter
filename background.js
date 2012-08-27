@@ -7,8 +7,7 @@ var defaults = {
 	apilookup:	true,
 	dnt:		true,
 	click:		'intent',	// intent, tab, custom, nothing
-	custom_url:	'',
-	custom_target:	'_blank'
+	customURL:	''
 }
 
 // !Incoming request
