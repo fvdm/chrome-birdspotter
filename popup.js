@@ -104,9 +104,9 @@ chrome.tabs.query(
 	}
 )
 
-function displayIntent() {
 	var left = parseInt( (screen.availWidth / 2) - 250 )
 	var top = parseInt( (screen.availHeight / 2) - 184 )
 	window.open( 'https://twitter.com/intent/user?screen_name='+ this.getAttribute('data-username') +'&dnt=true', 'twitterIntent', 'width=500,height=368,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,screenX='+ left +',screenY='+ top )
+function openUser() {
 	return false
 }
