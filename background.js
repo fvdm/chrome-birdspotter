@@ -1,5 +1,15 @@
 // !Storage
 var tabs = {}
+var prefs = {}
+var defaults = {
+	avatars:	true,
+	apilookup:	true,
+	dnt:		true,
+	https:		true,
+	click:		'intent',	// intent, tab, custom, nothing
+	custom_url:	'',
+	custom_target:	'_blank'
+}
 
 // !Incoming request
 chrome.extension.onRequest.addListener( function( request, sender, response ) {
@@ -13,6 +23,26 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 	}
 	
 	switch( request.action ) {
+		
+		// Options - GET
+		case 'getOptions':
+			chrome.storage.sync.get( 'options', function( res ) {
+				response({
+					options: res.options || defaults,
+					status: 'ok'
+				})
+			})
+			break
+			
+		// Options - UPDATE
+		case 'setOptions':
+			chrome.storage.sync.set( {options: request.options}, function() {
+				response({
+					options: request.options,
+					status: 'ok'
+				})
+			})
+			break
 		
 		// !Done spotting
 		case 'doneSpotting':

@@ -1,15 +1,8 @@
 var prefs = {}
-var defaults = {
-	avatars:	true,
-	apilookup:	true,
-	dnt:		true,
-	https:		true,
-	onclick:	0	// intent
-}
 
 function loadOptions() {
-	chrome.storage.sync.get( 'options', function( res ) {
-		prefs = res.options || defaults
+	chrome.extension.sendRequest( {action: 'getOptions'}, function( res ) {
+		prefs = res.options
 		for( var id in prefs ) {
 			itmValue( id, prefs[id] )
 		}
@@ -18,7 +11,10 @@ function loadOptions() {
 
 function saveOption() {
 	prefs[ this.id ] = itmValue( this.id )
-	chrome.storage.sync.set( {options: prefs}, function() {})
+	chrome.extension.sendRequest({
+		action: 'setOptions',
+		options: prefs
+	})
 }
 
 // change item
@@ -62,10 +58,6 @@ if( selects.length >= 1 ) {
 		}
 	}
 }
-
-chrome.storage.onChanged.addListener( function() {
-	loadOptions()
-})
 
 // First load
 loadOptions()
