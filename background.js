@@ -120,7 +120,7 @@ function apiLimit( cb ) {
 			}
 		}
 	}
-	xhr.open( 'GET', 'https://twitter.com/account/rate_limit_status.json', true )
+	xhr.open( 'GET', 'https://twitter.com/account/rate_limit_status.json' + (prefs.dnt ? '?dnt=true' : ''), true )
 	xhr.send()
 }
 
