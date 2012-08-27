@@ -104,9 +104,40 @@ chrome.tabs.query(
 	}
 )
 
-	var left = parseInt( (screen.availWidth / 2) - 250 )
-	var top = parseInt( (screen.availHeight / 2) - 184 )
-	window.open( 'https://twitter.com/intent/user?screen_name='+ this.getAttribute('data-username') +'&dnt=true', 'twitterIntent', 'width=500,height=368,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,screenX='+ left +',screenY='+ top )
 function openUser() {
+	var click = this.getAttribute('data-click')
+	var proto = prefs.https ? 'https:' : 'http:'
+	var dnt = prefs.dnt ? '&dnt=true' : ''
+	
+	switch( click ) {
+		
+		case 'intent':
+			var left = parseInt( (screen.availWidth / 2) - 250 )
+			var top = parseInt( (screen.availHeight / 2) - 184 )
+			window.open( proto +'//twitter.com/intent/user?screen_name='+ this.getAttribute('data-username') + dnt, 'twitterIntent', 'width=500,height=368,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,screenX='+ left +',screenY='+ top )
+			break
+			
+		case 'newtab':
+			console.log( proto +'//twitter.com/'+ this.getAttribute('data-username') )
+			window.open( proto +'//twitter.com/'+ this.getAttribute('data-username'), '_blank' )
+			break
+			
+		case 'custom':
+			var url = prefs.custom_url.replace( /\b\%([a-z])\b/, function( str, c ) {
+				switch( c ) {
+					case 'u': return this.getAttribute('data-username'); break
+					case 'p': return prefs.https ? 'https:' : 'http:'; break
+					default: return ''; break
+				}
+			})
+			
+			window.open( url, prefs.custom_target || '_blank' )
+			break
+			
+		case 'nothing':
+		default:
+			break
+	}
+	
 	return false
 }
