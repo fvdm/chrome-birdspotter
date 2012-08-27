@@ -158,7 +158,9 @@ function http_request( usernames, cb ) {
 		}
 	}
 	
-	xhr.open( 'GET', 'https://api.twitter.com/1/users/lookup.json?screen_name='+ usernames +'&include_entities=false&dnt=true', true )
+	var protocol = prefs.https ? 'https:' : 'http:'
+	var dnt = prefs.dnt ? '&dnt=true' : ''
+	xhr.open( 'GET', protocol +'//api.twitter.com/1/users/lookup.json?screen_name='+ usernames +'&include_entities=false'+ dnt, true )
 	xhr.send()
 }
 
