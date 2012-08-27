@@ -15,27 +15,27 @@
 			<h1>Bird Spotter - Options</h1>
 			<table>
 				<tr>
-					<td>Display avatars</td>
+					<td><label for="avatars">Display avatars</label></td>
 					<td><input type="checkbox" id="avatars"></td>
 					<td id="avatarsStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Display real names</td>
+					<td><label for="realnames">Display real names</label></td>
 					<td><input type="checkbox" id="realnames"></td>
 					<td id="realnamesStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Load user details</td>
+					<td><label for="apilookup">Load user details</label></td>
 					<td><input type="checkbox" id="apilookup"> <span class="note">(API call, disabling will slow avatar loading)</span></td>
 					<td id="apilookupStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Enable Do-Not-Track</td>
+					<td><label for="dnt">Enable Do-Not-Track</label></td>
 					<td><input type="checkbox" id="dnt"></td>
 					<td id="dntStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>On clicking a user:</td>
+					<td><label for="click">On clicking a user:</label></td>
 					<td>
 						<select size="1" id="click">
 							<option value="intent">display summary (intent)</option>
@@ -47,9 +47,9 @@
 					<td id="onclickStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Custom URL ({user} = username)</td>
+					<td><label for="customURL">Custom URL ({user} = username)</label></td>
 					<td><input type="text" id="customURL" style="width:300px;"></td>
-					<td>&nbsp;</td>
+					<td id="customURLStatus">&nbsp;</td>
 				</tr>
 				<tr style="color:#999;">
 					<td>Twitter API limit:</td>

@@ -1,7 +1,6 @@
 var prefs = {}
 
 function buildUser( bird ) {
-	console.log( bird )
 	var li = document.createElement('li')
 	li.setAttribute( 'data-username', bird.screen_name )
 	li.onclick = openUser
@@ -59,6 +58,8 @@ chrome.tabs.query(
 				function( response ) {
 					
 					if( navigator.onLine ) {
+					
+						// !Browser online
 						if( prefs.avatars && prefs.apilookup ) {
 							var style = 'fancy'
 						} else if( prefs.avatars && !prefs.apilookup ) {
