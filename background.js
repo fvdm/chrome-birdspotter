@@ -24,7 +24,16 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 	
 	switch( request.action ) {
 		
-		// Options - GET
+		// !API limit
+		case 'apiLimit':
+			apiLimit( function( res ) {
+				response({
+					status: 'ok',
+					limit: res
+				})
+			})
+			break;
+		
 		case 'getOptions':
 			chrome.storage.sync.get( 'options', function( res ) {
 				response({
@@ -96,6 +105,24 @@ chrome.tabs.onRemoved.addListener( function( tabId, removeInfo ) {
 		delete tabs[ 't'+ tabId ]
 	}
 })
+
+// !Get API limit
+function apiLimit( cb ) {
+	var xhr = new XMLHttpRequest()
+	xhr.onreadystatechange = function() {
+		if( xhr.readyState == 4 && xhr.status == 200 ) {
+			var data = xhr.responseText
+			if( data.substr(0,1) == '{' && data.substr( data.length -1, 1 ) == '}' ) {
+				data = JSON.parse( data )
+				if( data.hourly_limit !== undefined ) {
+					cb( data )
+				}
+			}
+		}
+	}
+	xhr.open( 'GET', 'https://twitter.com/account/rate_limit_status.json', true )
+	xhr.send()
+}
 
 // !Get user from Twitter API
 function fetch_bird( usernames, cb ) {
