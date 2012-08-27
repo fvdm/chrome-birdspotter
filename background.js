@@ -3,6 +3,7 @@ var tabs = {}
 var prefs = {}
 var defaults = {
 	avatars:	true,
+	realnames:	false,
 	apilookup:	true,
 	dnt:		true,
 	click:		'intent',	// intent, tab, custom, nothing
@@ -134,7 +135,7 @@ function fetch_bird( usernames, cb ) {
 			cb({
 				screen_name:			bird.screen_name,
 				id_str:				bird.id_str,
-//				name:				bird.name,
+				name:				bird.name,
 //				location:			bird.location,
 //				url:				bird.url,
 				description:			bird.description,

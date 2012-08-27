@@ -20,7 +20,7 @@ function buildUser( bird ) {
 	// screen_name
 	var name = document.createElement('div')
 	name.className = 'name'
-	name.innerHTML = bird.screen_name
+	name.innerHTML = prefs.realnames ? bird.name : bird.screen_name
 	li.appendChild( name )
 	
 	// details

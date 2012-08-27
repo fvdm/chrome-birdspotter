@@ -31,6 +31,8 @@ function itmValue( id, value ) {
 						itm.selectedIndex = o
 					}
 				}
+			} else if( itm.type && itm.type == 'text' ) {
+				itm.value = value
 			}
 		} else {
 			// GET value
@@ -38,6 +40,8 @@ function itmValue( id, value ) {
 				var value = itm.checked
 			} else if( itm.tagName == 'SELECT' ) {
 				var value = itm.options[ itm.selectedIndex ].value
+			} else if( itm.type && itm.type == 'text' ) {
+				var value = itm.value
 			}
 		}
 	}
