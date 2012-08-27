@@ -37,7 +37,7 @@ function itmValue( id, value ) {
 			}
 		}
 	}
-	return value || null
+	return value || false
 }
 
 // watch for changes
