@@ -27,8 +27,8 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		case 'apiLimit':
 			apiLimit( function( res ) {
 				response({
-					status: 'ok',
-					limit: res
+					limit: res,
+					status: 'ok'
 				})
 			})
 			break;
@@ -138,20 +138,9 @@ function fetch_bird( usernames, cb ) {
 						screen_name:			bird.screen_name,
 						id_str:				bird.id_str,
 						name:				bird.name,
-		//				location:			bird.location,
-		//				url:				bird.url,
 						description:			bird.description,
-		//				protected:			bird.protected,
 						followers_count:		bird.followers_count,
 						followers_count_human:		human_number( bird.followers_count ),
-		//				friends_count:			bird.friends_count,
-		//				friends_count_human:		human_number( bird.friends_count ),
-		//				created_at:			bird.created_at,
-		//				utc_offset:			bird.utc_offset,
-		//				verified:			bird.verified,
-		//				statuses_count:			bird.statuses_count,
-		//				statuses_count_human:		human_number( bird.statuses_count ),
-		//				lang:				bird.lang,
 						profile_image_url_https:	bird.profile_image_url_https,
 		//				following:			bird.following,
 		//				follow_request_sent:		bird.follow_request_sent
