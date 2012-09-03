@@ -107,7 +107,12 @@ function openUser() {
 			
 		case 'custom':
 			var url = prefs.customURL.replace( '{user}', this.getAttribute('data-username') )
-			window.open( url )
+			if( !url.match( /^(http|https|ftp|file):/ ) ) {
+				var el = document.getElementById('appLoader')
+				el.src = url
+			} else {
+				window.open( url )
+			}
 			break
 			
 		case 'nothing':

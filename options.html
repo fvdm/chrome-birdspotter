@@ -15,7 +15,7 @@
 			<h1>Bird Spotter - Options</h1>
 			<table>
 				<tr>
-					<td><label for="avatars">Display avatars</label></td>
+					<td width="230"><label for="avatars">Display avatars</label></td>
 					<td><input type="checkbox" id="avatars"></td>
 					<td id="avatarsStatus">&nbsp;</td>
 				</tr>
@@ -47,8 +47,10 @@
 					<td id="onclickStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td><label for="customURL">Custom URL ({user} = username)</label></td>
-					<td><input type="text" id="customURL" style="width:300px;"></td>
+					<td valign="baseline"><label for="customURL">Custom URL ({user} = username)</label></td>
+					<td>
+						<input type="text" id="customURL" style="width:300px;">
+						<br><small>Example: <code>tweetbot:///user_profile/{user}</code><br>to open the user profile in the Tweetbot app</small></td>
 					<td id="customURLStatus">&nbsp;</td>
 				</tr>
 				<tr style="color:#999;">
