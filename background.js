@@ -176,7 +176,7 @@ function http_request( usernames, cb ) {
 	xhr.onreadystatechange = function() {
 		if( xhr.readyState == 4 ) {
 			var data = xhr.responseText.trim()
-			if( data.length >= 2 && data.match( /^(\{.*\}|\[.*\])$/ ) ) {
+			if( data.match( /^(\{.*\}|\[.*\])$/ ) ) {
 				data = JSON.parse( data )
 				if( data && data[0] && data[0].screen_name ) {
 					for( var t in data ) {
