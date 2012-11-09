@@ -17,10 +17,8 @@ if( document.location.host !== 'twitter.com' && document.links.length >= 1 ) {
 if( document.head.children && document.head.children.length >= 1 ) {
 	for( var m in document.head.children ) {
 		var tag = document.head.children[m]
-		if( tag.nodeName == 'META' ) {
-			if( tag.outerHTML.match( /\b(name|property)=['"]twitter:creator['"]/i ) ) {
-				tag.outerHTML.replace( /\b(content|value)=['"]([a-z0-9_]{1,20})\b/i, foundUser )
-			}
+		if( tag.nodeName == 'META' && tag.outerHTML.match( /\b(name|property)=['"]twitter:creator['"]/i ) ) {
+			foundUser( tag.content || tag.value )
 		}
 	}
 }
