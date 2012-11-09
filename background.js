@@ -31,7 +31,7 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 					status: 'ok'
 				})
 			})
-			break;
+			break
 		
 		// !Options - GET
 		case 'getOptions':
