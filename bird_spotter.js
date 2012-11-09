@@ -3,7 +3,7 @@ if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
 		var link = document.links[l]
 		if( link.href ) {
-			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)(\?|\/|$)/i, function( str, www, hash, username ) {
+			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)(\?|\/|$)/i, function( s, s, s, username ) {
 				if( !username.match( /^(home|intent|share|jobs|tos|privacy|images|settings|about|i|download|activity|who_to_follow|search|invitations)$/i ) ) {
 					foundUser( username )
 				}
@@ -21,7 +21,7 @@ if( document.head.children && document.head.children.length >= 1 ) {
 		var tag = document.head.children[m]
 		if( tag.nodeName == 'META' ) {
 			if( tag.outerHTML.match( /\b(name|property)=['"]twitter:creator['"]/i ) ) {
-				tag.outerHTML.replace( /\b(content|value)=['"]([^'"]+)['"]/i, function( s, k, user ) {
+				tag.outerHTML.replace( /\b(content|value)=['"]([^'"]+)['"]/i, function( s, s, user ) {
 					foundUser( user )
 				})
 			}
