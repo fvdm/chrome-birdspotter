@@ -8,9 +8,7 @@ if( document.location.host !== 'twitter.com' && document.links.length >= 1 ) {
 					foundUser( username )
 				}
 			})
-			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(share|intent\/user|intent\/tweet)\?.*\b(via|screen_name|related)=([a-z0-9_]+)&?.*$/i, function( s, s, s, s, username ) {
-				foundUser( username )
-			})
+			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(share|intent\/user|intent\/tweet)\?.*\b(via|screen_name|related)=([a-z0-9_]+)&?.*$/i, foundUser )
 		}
 	}
 }
@@ -21,9 +19,7 @@ if( document.head.children && document.head.children.length >= 1 ) {
 		var tag = document.head.children[m]
 		if( tag.nodeName == 'META' ) {
 			if( tag.outerHTML.match( /\b(name|property)=['"]twitter:creator['"]/i ) ) {
-				tag.outerHTML.replace( /\b(content|value)=['"]([^'"]+)['"]/i, function( s, s, user ) {
-					foundUser( user )
-				})
+				tag.outerHTML.replace( /\b(content|value)=['"]([^'"]+)['"]/i, foundUser )
 			}
 		}
 	}
@@ -34,22 +30,21 @@ if( document.location.host !== 'twitter.com' && document.scripts && document.scr
 	for( var s in document.scripts ) {
 		var script = document.scripts[s]
 		if( script.src && script.src.match( /https?:\/\/([^\.]+)\.twitter\.com\//i ) ) {
-			script.src.replace( /\/statuses\/user_timeline\/([^\.]+)\./i, function( s, user ) {
-				foundUser( user )
-			})
-			script.src.replace( /\bscreen_name=([^\&]+)\&/i, function( s, user ) {
-				foundUser( user )
-			})
+			script.src.replace( /\/statuses\/user_timeline\/([^\.]+)\./i, foundUser )
+			script.src.replace( /\bscreen_name=([^\&]+)\&/i, foundUser )
 		}
 	}
 }
 
 // !Found a user
-function foundUser( username ) {
-	chrome.extension.sendRequest({
-		action:	'twitterUser',
-		user:	username.toLowerCase()
-	})
+function foundUser() {
+	var username = arguments[ arguments.length -1 ]
+	if( username instanceof String ) {
+		chrome.extension.sendRequest({
+			action:	'twitterUser',
+			user:	username.toLowerCase()
+		})
+	}
 }
 
 // !Task done
