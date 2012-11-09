@@ -3,12 +3,12 @@ if( document.location.host !== 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
 		var link = document.links[l]
 		if( link.href ) {
-			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]+)(\?|\/|$)/i, function( s, s, s, username ) {
+			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]{1,20})\b/i, function( s, s, s, username ) {
 				if( !username.match( /^(home|intent|share|jobs|tos|privacy|images|settings|about|i|download|activity|who_to_follow|search|invitations)$/i ) ) {
 					foundUser( username )
 				}
 			})
-			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(share|intent\/user|intent\/tweet)\?.*\b(via|screen_name|related)=([a-z0-9_]+)&?.*$/i, foundUser )
+			link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(share|intent\/user|intent\/tweet)\?.*\b(via|screen_name|related)=([a-z0-9_]{1,20})\b/i, foundUser )
 		}
 	}
 }
@@ -19,7 +19,7 @@ if( document.head.children && document.head.children.length >= 1 ) {
 		var tag = document.head.children[m]
 		if( tag.nodeName == 'META' ) {
 			if( tag.outerHTML.match( /\b(name|property)=['"]twitter:creator['"]/i ) ) {
-				tag.outerHTML.replace( /\b(content|value)=['"]([^'"]+)['"]/i, foundUser )
+				tag.outerHTML.replace( /\b(content|value)=['"]([a-z0-9_]{1,20})\b/i, foundUser )
 			}
 		}
 	}
@@ -30,8 +30,8 @@ if( document.location.host !== 'twitter.com' && document.scripts && document.scr
 	for( var s in document.scripts ) {
 		var script = document.scripts[s]
 		if( script.src && script.src.match( /https?:\/\/([^\.]+)\.twitter\.com\//i ) ) {
-			script.src.replace( /\/statuses\/user_timeline\/([^\.]+)\./i, foundUser )
-			script.src.replace( /\bscreen_name=([^\&]+)\&/i, foundUser )
+			script.src.replace( /\/statuses\/user_timeline\/([a-z0-9_]{1,20})\b/i, foundUser )
+			script.src.replace( /\bscreen_name=([a-z0-9_]{1,20})\b/i, foundUser )
 		}
 	}
 }
@@ -39,7 +39,7 @@ if( document.location.host !== 'twitter.com' && document.scripts && document.scr
 // !Found a user
 function foundUser() {
 	var username = arguments[ arguments.length -1 ]
-	if( typeof username === 'string' ) {
+	if( typeof username === 'string' && username.match( /^[a-z0-9_]{1,20}$/i ) ) {
 		chrome.extension.sendRequest({
 			action:	'twitterUser',
 			user:	username.toLowerCase()
