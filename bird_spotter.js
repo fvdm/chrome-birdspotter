@@ -1,5 +1,5 @@
 // !Parse links
-if( document.location.host != 'twitter.com' && document.links.length >= 1 ) {
+if( document.location.host !== 'twitter.com' && document.links.length >= 1 ) {
 	for( var l in document.links ) {
 		var link = document.links[l]
 		if( link.href ) {
@@ -30,7 +30,7 @@ if( document.head.children && document.head.children.length >= 1 ) {
 }
 
 // !Parse widgets
-if( document.location.host != 'twitter.com' && document.scripts && document.scripts.length >= 1 ) {
+if( document.location.host !== 'twitter.com' && document.scripts && document.scripts.length >= 1 ) {
 	for( var s in document.scripts ) {
 		var script = document.scripts[s]
 		if( script.src && script.src.match( /https?:\/\/([^\.]+)\.twitter\.com\//i ) ) {
