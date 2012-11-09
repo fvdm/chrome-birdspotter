@@ -19,19 +19,9 @@
 			<h1>Bird Spotter - Options</h1>
 			<table>
 				<tr>
-					<td width="230"><label for="avatars">Display avatars</label></td>
-					<td><input type="checkbox" id="avatars"></td>
+					<td width="250"><label for="avatars">Display avatars</label></td>
+					<td width="360"><input type="checkbox" id="avatars"></td>
 					<td id="avatarsStatus">&nbsp;</td>
-				</tr>
-				<tr>
-					<td><label for="realnames">Display real names</label></td>
-					<td><input type="checkbox" id="realnames"></td>
-					<td id="realnamesStatus">&nbsp;</td>
-				</tr>
-				<tr>
-					<td><label for="apilookup">Load user details</label></td>
-					<td><input type="checkbox" id="apilookup"> <span class="note">(API call, disabling will slow avatar loading)</span></td>
-					<td id="apilookupStatus">&nbsp;</td>
 				</tr>
 				<tr>
 					<td><label for="dnt">Enable Do-Not-Track</label></td>
@@ -51,17 +41,38 @@
 					<td id="onclickStatus">&nbsp;</td>
 				</tr>
 				<tr>
-					<td valign="baseline"><label for="customURL">Custom URL ({user} = username)</label></td>
+					<td valign="baseline"><label for="customURL">Custom URL<br><small>{user} = username</small></label></td>
 					<td>
 						<input type="text" id="customURL" style="width:300px;">
 						<br><small>Example: <code>twitterrific:///profile?screen_name={user}</code>
 						<br>to open the user profile in the Twitterrific app</small></td>
 					<td id="customURLStatus">&nbsp;</td>
 				</tr>
-				<tr style="color:#999;">
-					<td>Twitter API limit:</td>
+				<tr>
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<td valign="baseline"><strong>Twitter API switches</strong></td>
+					<td style="font-size:small">The options below require Twitter API access. By default each IP-address can make up to 150 API calls per hour. When you use more Twitter extensions, apps, clients, devices, etc. you may run out of credits. If you don&apos;t want Bird Spotter to spend API credits, disable the option below.</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr style="color:#999;font-size:small;">
+					<td>Your current Twitter API limit:</td>
 					<td id="apilimit">&nbsp;</td>
 					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><label for="apilookup">Load user details</label></td>
+					<td><input type="checkbox" id="apilookup"></td>
+					<td id="apilookupStatus">&nbsp;</td>
+				</tr>
+				<tr>
+					<td><label for="realnames">Display real names</label></td>
+					<td><input type="checkbox" id="realnames"></td>
+					<td id="realnamesStatus">&nbsp;</td>
 				</tr>
 			</table>
 		</div>
