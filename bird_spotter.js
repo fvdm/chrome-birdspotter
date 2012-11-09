@@ -39,7 +39,7 @@ if( document.location.host !== 'twitter.com' && document.scripts && document.scr
 // !Found a user
 function foundUser() {
 	var username = arguments[ arguments.length -1 ]
-	if( username instanceof String ) {
+	if( typeof username === 'string' ) {
 		chrome.extension.sendRequest({
 			action:	'twitterUser',
 			user:	username.toLowerCase()
