@@ -37,10 +37,12 @@ if( document.location.host !== 'twitter.com' && document.scripts && document.scr
 // !Found a user
 function foundUser() {
 	var username = arguments[ arguments.length -1 ]
-	if( typeof username === 'string' && username.match( /^[a-z0-9_]{1,20}$/i ) ) {
-		chrome.extension.sendRequest({
-			action:	'twitterUser',
-			user:	username.toLowerCase()
+	if( typeof username === 'string' ) {
+		username.replace( /^@([a-z0-9]{1,20}$/i, function( s, u ) {
+			chrome.extension.sendRequest({
+				action:	'twitterUser',
+				user:	u.toLowerCase()
+			})
 		})
 	}
 }
