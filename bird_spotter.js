@@ -17,7 +17,7 @@ if( document.location.host !== 'twitter.com' && document.links.length >= 1 ) {
 if( document.head.children && document.head.children.length >= 1 ) {
 	for( var m in document.head.children ) {
 		var tag = document.head.children[m]
-		if( tag.nodeName == 'META' && tag.outerHTML.match( /\b(name|property)=['"]twitter:creator['"]/i ) ) {
+		if( tag.nodeName == 'META' && tag.outerHTML.match( /\b(name|property)=['"]twitter:(creator|site)['"]/i ) ) {
 			foundUser( tag.content || tag.value )
 		}
 	}
