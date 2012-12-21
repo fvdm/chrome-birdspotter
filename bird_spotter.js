@@ -34,6 +34,17 @@ if( document.location.host !== 'twitter.com' && document.scripts && document.scr
 	}
 }
 
+// !Parse SexyBookmarks (Wordpress plugin)
+if( typeof SHRSB_Settings === 'object' && Object.keys(SHRSB_Settings).length >= 1 ) {
+  for( var s in SHRSB_Settings ) {
+    for( var S in SHRSB_Settings[s] ) {
+      if( typeof SHRSB_Settings[s].twitter_template === 'string' ) {
+        SHRSB_Settings[s].twitter_template.replace( /via\+%40([a-z0-9_]{1,20})/, foundUser )
+      }
+    }
+  }
+}
+
 // !Found a user
 function foundUser() {
 	var username = arguments[ arguments.length -1 ]
