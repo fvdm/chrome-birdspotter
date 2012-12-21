@@ -4,12 +4,12 @@ function chrome_birdspotter() {
 		for( var l in document.links ) {
 			var link = document.links[l]
 			if( link.href ) {
-				link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([a-z0-9_]{1,20})\b/i, function( s, s, s, username ) {
+				link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?(\@|%40)?([a-z0-9_]{1,20})\b/i, function( s, s, s, s, username ) {
 					if( !username.match( /^(home|intent|share|jobs|tos|privacy|images|settings|about|i|download|activity|who_to_follow|search|invitations)$/i ) ) {
 						foundUser( username )
 					}
 				})
-				link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(share|intent\/user|intent\/tweet)\?.*\b([\?\&])?(via|screen_name|related)=([a-z0-9_]{1,20})\b/i, foundUser )
+				link.href.replace( /^https?:\/\/(www\.)?twitter\.com\/(share|intent\/user|intent\/tweet)\?.*\b([\?\&])?(via|screen_name|related)=(\@|%40)?([a-z0-9_]{1,20})\b/i, foundUser )
 			}
 		}
 	}
@@ -29,8 +29,8 @@ function chrome_birdspotter() {
 		for( var s in document.scripts ) {
 			var script = document.scripts[s]
 			if( script.src && script.src.match( /https?:\/\/([^\.]+)\.twitter\.com\//i ) ) {
-				script.src.replace( /\/statuses\/user_timeline\/([a-z0-9_]{1,20})\b/i, foundUser )
-				script.src.replace( /\bscreen_name=([a-z0-9_]{1,20})\b/i, foundUser )
+				script.src.replace( /\/statuses\/user_timeline\/(\@|%40)?([a-z0-9_]{1,20})\b/i, foundUser )
+				script.src.replace( /\bscreen_name=(@|%40)?([a-z0-9_]{1,20})\b/i, foundUser )
 			}
 		}
 	}
@@ -39,7 +39,7 @@ function chrome_birdspotter() {
 	if( typeof SHRSB_Settings === 'object' && Object.keys(SHRSB_Settings).length >= 1 ) {
 		for( var s in SHRSB_Settings ) {
 			if( typeof SHRSB_Settings[s].twitter_template === 'string' ) {
-				SHRSB_Settings[s].twitter_template.replace( /via\+%40([a-z0-9_]{1,20})/, foundUser )
+				SHRSB_Settings[s].twitter_template.replace( /via\+(\@|%40)?([a-z0-9_]{1,20})/, foundUser )
 			}
 		}
 	}
@@ -48,7 +48,7 @@ function chrome_birdspotter() {
 	function foundUser() {
 		var username = arguments[ arguments.length -1 ]
 		if( typeof username === 'string' ) {
-			username.replace( /^@([a-z0-9]{1,20}$/i, function( s, u ) {
+			username.replace( /^([a-z0-9]{1,20})$/i, function( s, u ) {
 				chrome.extension.sendRequest({
 					action:	'twitterUser',
 					user:	u.toLowerCase()
