@@ -3,6 +3,7 @@ var tabs = {}
 var prefs = {}
 var defaults = {
 	avatars:	true,
+	onTwitter:	false,
 	realnames:	false,
 	apilookup:	true,
 	dnt:		true,
