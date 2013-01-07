@@ -52,7 +52,7 @@ chrome.extension.sendRequest({ action: 'getOptions' }, function(res) {
 		function foundUser() {
 			var username = arguments[ arguments.length -1 ]
 			if( typeof username === 'string' ) {
-				username.replace( /^([a-z0-9]{1,20})$/i, function( s, u ) {
+				username.replace( /^([a-z0-9_]{1,20})$/i, function( s, u ) {
 					chrome.extension.sendRequest({
 						action:	'twitterUser',
 						user:	u.toLowerCase()
