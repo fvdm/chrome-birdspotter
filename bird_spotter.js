@@ -3,6 +3,16 @@ chrome.extension.sendRequest({ action: 'getOptions' }, function(res) {
 	
 	if( !skipSite ) {
 		
+		// !Humans.txt file?
+		if( document.location.href.match( /\/humans\.txt$/ ) ) {
+			var preTags = document.getElementsByTagName('pre')
+			if( preTags[0] !== undefined && preTags[0].innerText != '' ) {
+				preTags[0].innerText.replace( /Twitter:[\s\t]*\@?([a-z0-9_]{1,20})/gi, function( s, user ) {
+					foundUser( user )
+				})
+			}
+		}
+		
 		// !Parse links
 		if( document.links.length >= 1 ) {
 			for( var l in document.links ) {
