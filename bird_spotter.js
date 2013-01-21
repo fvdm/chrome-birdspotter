@@ -44,6 +44,8 @@ chrome.extension.sendRequest({ action: 'getOptions' }, function(res) {
 		if( document.scripts && document.scripts.length >= 1 ) {
 			for( var s in document.scripts ) {
 				var script = document.scripts[s]
+				
+				// !Parse wpFollowmeFlash (Wordpress plugin)
 				if( script.src == '' && script.text.indexOf('wpFollowmeFlash') > -1 ) {
 					var params = document.getElementsByTagName('param')
 					for( var p in params ) {
@@ -54,6 +56,8 @@ chrome.extension.sendRequest({ action: 'getOptions' }, function(res) {
 						}
 					}
 				}
+				
+				// !Parse Twitter widgets
 				if( script.src && script.src.match( /https?:\/\/([^\.]+)\.twitter\.com\//i ) ) {
 					script.src.replace( /\/statuses\/user_timeline\/(\@|%40)?([a-z0-9_]{1,20})\b/i, function( s,s, user ) { foundUser( user ) })
 					script.src.replace( /\bscreen_name=(\@|%40)?([a-z0-9_]{1,20})\b/i, function( s,s, user ) { foundUser( user ) })
