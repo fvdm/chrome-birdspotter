@@ -55,8 +55,8 @@ chrome.extension.sendRequest({ action: 'getOptions' }, function(res) {
 					}
 				}
 				if( script.src && script.src.match( /https?:\/\/([^\.]+)\.twitter\.com\//i ) ) {
-					script.src.replace( /\/statuses\/user_timeline\/(\@|%40)?([a-z0-9_]{1,20})\b/i, function( s, user ) { foundUser( user ) })
-					script.src.replace( /\bscreen_name=(\@|%40)?([a-z0-9_]{1,20})\b/i, function( s, user ) { foundUser( user ) })
+					script.src.replace( /\/statuses\/user_timeline\/(\@|%40)?([a-z0-9_]{1,20})\b/i, function( s,s, user ) { foundUser( user ) })
+					script.src.replace( /\bscreen_name=(\@|%40)?([a-z0-9_]{1,20})\b/i, function( s,s, user ) { foundUser( user ) })
 				}
 			}
 		}
@@ -65,7 +65,7 @@ chrome.extension.sendRequest({ action: 'getOptions' }, function(res) {
 		if( typeof SHRSB_Settings === 'object' && Object.keys(SHRSB_Settings).length >= 1 ) {
 			for( var s in SHRSB_Settings ) {
 				if( typeof SHRSB_Settings[s].twitter_template === 'string' ) {
-					SHRSB_Settings[s].twitter_template.replace( /via\+(\@|%40)?([a-z0-9_]{1,20})/, function( s, user ) { foundUser( user ) })
+					SHRSB_Settings[s].twitter_template.replace( /via\+(\@|%40)?([a-z0-9_]{1,20})/, function( s,s, user ) { foundUser( user ) })
 				}
 			}
 		}
