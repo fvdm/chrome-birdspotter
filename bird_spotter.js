@@ -73,6 +73,7 @@ chrome.extension.sendRequest({ action: 'getOptions' }, function(res) {
 		// !Found a user
 		function foundUser( username ) {
 			if( typeof username === 'string' ) {
+				username = username.replace( /^(@|%40)(.+)/, '$2' )
 				chrome.extension.sendRequest({
 					action:	'twitterUser',
 					user:	username.toLowerCase()
