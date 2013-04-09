@@ -19,7 +19,7 @@
 			"ftp://*/*"
 		],
 		"run_at":		"document_idle",
-		"js":			["sha.js", "ohauth.js", "bird_spotter.js"]
+		"js":			["bird_spotter.js"]
 	}],
 	"options_page":			"options.html",
 	"page_action": {
