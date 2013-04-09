@@ -1,6 +1,6 @@
 {
-	"version":			"2.2.4",
 	"name":				"Bird Spotter - Detect Twitter users",
+	"version":			"2.2.5",
 	"manifest_version":		2,
 	"description":			"Easily discover Twitter users on pages",
 	"icons": {
@@ -19,7 +19,7 @@
 			"ftp://*/*"
 		],
 		"run_at":		"document_idle",
-		"js":			["bird_spotter.js"]
+		"js":			["sha.js", "ohauth.js", "bird_spotter.js"]
 	}],
 	"options_page":			"options.html",
 	"page_action": {
