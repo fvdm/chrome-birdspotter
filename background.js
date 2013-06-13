@@ -194,7 +194,7 @@ function http_request( usernames, cb ) {
 		xhr.setRequestHeader( 'DNT', '1' )
 	}
 	
-	xhr.open( 'GET', 'https://api.twitter.com/1/users/lookup.json?screen_name='+ usernames +'&include_entities=false', true )
+	xhr.open( 'GET', 'https://api.twitter.com/1.1/users/lookup.json?screen_name='+ usernames +'&include_entities=false', true )
 	xhr.send()
 }
 
