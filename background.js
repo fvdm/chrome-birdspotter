@@ -188,12 +188,12 @@ function http_request( usernames, cb ) {
 		}
 	}
 	
+	xhr.open( 'GET', 'https://api.twitter.com/1.1/users/lookup.json?screen_name='+ usernames +'&include_entities=false', true )
 	
 	if( prefs.dnt ) {
 		xhr.setRequestHeader( 'DNT', '1' )
 	}
 	
-	xhr.open( 'GET', 'https://api.twitter.com/1.1/users/lookup.json?screen_name='+ usernames +'&include_entities=false', true )
 	xhr.send()
 }
 
