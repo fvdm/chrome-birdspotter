@@ -188,6 +188,8 @@ function http_request( usernames, cb ) {
 		}
 	}
 	
+	xhr.setRequestHeader( 'User-Agent', 'BirdSpotter (http://frankl.in/projects/372-bird-spotter-for-google-chrome)' )
+	
 	if( prefs.dnt ) {
 		xhr.setRequestHeader( 'DNT', '1' )
 	}
