@@ -11,7 +11,7 @@ function buildUser( bird ) {
 		if( bird.profile_image_url_https !== undefined ) {
 			avatar.src = bird.profile_image_url_https + (prefs.dnt ? '?dnt=true' : '')
 		} else {
-			avatar.src = 'https://api.twitter.com/1/users/profile_image?screen_name='+ bird.screen_name +'&size=normal'+ (prefs.dnt ? '&dnt=true' : '')
+			avatar.src = 'https://api.twitter.com/1.1/users/profile_image?screen_name='+ bird.screen_name +'&size=normal'+ (prefs.dnt ? '&dnt=true' : '')
 		}
 		li.appendChild( avatar )
 	}
