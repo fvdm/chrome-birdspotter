@@ -175,7 +175,7 @@ function http_request( usernames, cb ) {
 	var xhr = new XMLHttpRequest()
 	
 	xhr.onreadystatechange = function() {
-		if( xhr.readyState == 4 ) {
+		if( xhr.readyState == 4 && xhr.status == 200 ) {
 			var data = xhr.responseText.trim()
 			if( data.match( /^(\{.*\}|\[.*\])$/ ) ) {
 				data = JSON.parse( data )
