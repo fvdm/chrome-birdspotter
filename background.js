@@ -15,10 +15,21 @@ var defaults = {
 chrome.extension.onRequest.addListener( function( request, sender, response ) {
 	
 	// !new tab, or tab changed URL
-	if( tabs[ 't'+ sender.tab.id ] === undefined || tabs[ 't'+ sender.tab.id ].href != sender.tab.url ) {
-		tabs[ 't'+ sender.tab.id ] = {
+	var tabId = request.tabId || sender.tabId || null
+	var tabUrl = null
+	
+	if( sender && sender.tab ) {
+		var tabId = sender.tab.id
+		var tabUrl = sender.tab.url
+	} else if( request && request.tab ) {
+		var tabId = request.tab.id
+		var tabUrl = request.tab.url
+	}
+	
+	if( tabs[ 't'+ tabId ] === undefined || tabs[ 't'+ tabId ].href != tabUrl ) {
+		tabs[ 't'+ tabId ] = {
 			users: {},
-			href: sender.tab.url
+			href: tabUrl
 		}
 	}
 	
@@ -58,17 +69,17 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		case 'doneSpotting':
 			
 			// any users found?
-			if( tabs[ 't'+ sender.tab.id ] && tabs[ 't'+ sender.tab.id ].users && Object.keys( tabs[ 't'+ sender.tab.id ].users ).length >= 1 ) {
+			if( tabs[ 't'+ tabId ] && tabs[ 't'+ tabId ].users && Object.keys( tabs[ 't'+ tabId ].users ).length >= 1 ) {
 				
 				// !Display icon
-				chrome.pageAction.show( sender.tab.id )
+				chrome.pageAction.show( tabId )
 				
 				// collect usernames for mass lookup (save API calls)
-				var all_usernames = Object.keys( tabs[ 't'+ sender.tab.id ].users ).join(',')
+				var all_usernames = Object.keys( tabs[ 't'+ tabId ].users ).join(',')
 				
 				// fetch em, and replace when it is found
 				fetch_bird( all_usernames, function( bird ) {
-					tabs[ 't'+ sender.tab.id ].users[ bird.screen_name.toLowerCase() ] = bird
+					tabs[ 't'+ tabId ].users[ bird.screen_name.toLowerCase() ] = bird
 				})
 			}
 			
@@ -80,8 +91,8 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 			
 			// !add to users
 			var username = request.user.toLowerCase()
-			if( tabs[ 't'+ sender.tab.id ].users[ username ] === undefined ) {
-				tabs[ 't'+ sender.tab.id ].users[ username ] = {
+			if( tabs[ 't'+ tabId ].users[ username ] === undefined ) {
+				tabs[ 't'+ tabId ].users[ username ] = {
 					screen_name: username
 				}
 			}
@@ -91,8 +102,8 @@ chrome.extension.onRequest.addListener( function( request, sender, response ) {
 		
 		// !Popup wants something
 		case 'getUsers':
-			if( tabs[ 't'+ request.tabId ] ) {
-				response( tabs[ 't'+ request.tabId ] )
+			if( tabs[ 't'+ tabId ] ) {
+				response( tabs[ 't'+ tabId ] )
 			}
 			break
 		

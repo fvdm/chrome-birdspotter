@@ -46,14 +46,14 @@ chrome.tabs.query(
 		var tab = tabs[0]
 		
 		// !Get options
-		chrome.extension.sendRequest( {action: 'getOptions'}, function( res ) {
+		chrome.extension.sendRequest( {action: 'getOptions', tab: tab}, function( res ) {
 			prefs = res.options
 			
 			// !Get Twitter users from this tab
 			chrome.extension.sendRequest(
 				{
 					action: 'getUsers',
-					tabId:	tab.id
+					tab:	tab
 				},
 				function( response ) {
 					
