@@ -1,122 +1,122 @@
 <style>
-	a {
-		color: #000;
-		text-decoration: none;
-	}
-	
-	#wrap {
-		font-family: helvetica, geneva, arial, sans-serif;
-	}
-	
-	#offline {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		width: 35px;
-		height: 10px;
-		font-size: 9px;
-		word-wrap: break-word;
-		text-align: right;
-		color: #8a4500;
-		cursor: help;
-		z-index: 100;
-	}
-	
-	#list {
-		padding: 0;
-		list-style: none;
-		-webkit-user-select: none;
-	}
-	
-		/* !Item */
-		li {
-			overflow: hidden;
-		}
-		
-		li:hover {
-			background-color: #f0f0f0;
-			cursor: pointer;
-		}
-		
-		li img {
-			float: left;
-			height: inherit;
-			width: auto;
-			margin-right: 5px;
-		}
-			
-		li .name {
-			position: relative;
-			float: none;
-			height: 22px;
-			margin-left: 5px;
-			font-size: 14px;
-			font-weight: bold;
-			overflow: hidden;
-		}
-		
-		li .info {
-			position: relative;
-			float: none;
-			margin-left: 5px;
-			font-size: 10px;
-			color: #999;
-			overflow: hidden;
-		}
-		
-		
-		/* !Style - Fancy */
-		.fancy li {
-			height: 48px;
-			width: 230px;
-			margin-bottom: 10px;
-		}
-		
-		.fancy img { display: block; }
-		.fancy .info { display: block; }
-		
-		
-		/* !Style - Easy */
-		.easy li {
-			height: 20px;
-			width: 200px;
-			margin-bottom: 8px;
-		}
-		
-		.easy img { display: block; }
-		.easy .info { display: none; }
-		
-		
-		/* !Style - Boring */
-		.boring li {
-			height: 48px;
-			width: 180px;
-			margin-bottom: 10px;
-		}
-		
-		.boring img { display: none; }
-		.boring .info { display: block; }
-		
-		
-		/* !Style - Light */
-		.light li {
-			height: 20px;
-			width: 180px;
-			margin-bottom: 5px;
-		}
-		
-		.light img { display: none; }
-		.light .info { display: none; }
-		
-		
-		/* !Global overrides */
-		li:last-child {
-			margin-bottom: 0;
-		}
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  #wrap {
+    font-family: helvetica, geneva, arial, sans-serif;
+  }
+
+  #offline {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 10px;
+    font-size: 9px;
+    word-wrap: break-word;
+    text-align: right;
+    color: #8a4500;
+    cursor: help;
+    z-index: 100;
+  }
+
+  #list {
+    padding: 0;
+    list-style: none;
+    -webkit-user-select: none;
+  }
+
+    /* !Item */
+    li {
+      overflow: hidden;
+    }
+
+    li:hover {
+      background-color: #f0f0f0;
+      cursor: pointer;
+    }
+
+    li img {
+      float: left;
+      height: inherit;
+      width: auto;
+      margin-right: 5px;
+    }
+
+    li .name {
+      position: relative;
+      float: none;
+      height: 22px;
+      margin-left: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      overflow: hidden;
+    }
+
+    li .info {
+      position: relative;
+      float: none;
+      margin-left: 5px;
+      font-size: 10px;
+      color: #999;
+      overflow: hidden;
+    }
+
+
+    /* !Style - Fancy */
+    .fancy li {
+      height: 48px;
+      width: 230px;
+      margin-bottom: 10px;
+    }
+
+    .fancy img { display: block; }
+    .fancy .info { display: block; }
+
+
+    /* !Style - Easy */
+    .easy li {
+      height: 20px;
+      width: 200px;
+      margin-bottom: 8px;
+    }
+
+    .easy img { display: block; }
+    .easy .info { display: none; }
+
+
+    /* !Style - Boring */
+    .boring li {
+      height: 48px;
+      width: 180px;
+      margin-bottom: 10px;
+    }
+
+    .boring img { display: none; }
+    .boring .info { display: block; }
+
+
+    /* !Style - Light */
+    .light li {
+      height: 20px;
+      width: 180px;
+      margin-bottom: 5px;
+    }
+
+    .light img { display: none; }
+    .light .info { display: none; }
+
+
+    /* !Global overrides */
+    li:last-child {
+      margin-bottom: 0;
+    }
 
 </style>
 <div id="wrap">
-	<img src="icons/ajax-loader.gif">
+  <img src="icons/ajax-loader.gif">
 </div>
 <iframe src="" style="display:none;" id="appLoader"></iframe>
 <script src="popup.js"></script>
