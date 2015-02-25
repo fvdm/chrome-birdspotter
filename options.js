@@ -37,11 +37,11 @@ function itmValue (id, value) {
     } else {
       // GET value
       if (itm.type && itm.type === 'checkbox') {
-        var value = itm.checked;
+        value = itm.checked;
       } else if (itm.tagName === 'SELECT') {
-        var value = itm.options [itm.selectedIndex] .value;
+        value = itm.options [itm.selectedIndex] .value;
       } else if (itm.type && itm.type === 'text') {
-        var value = itm.value;
+        value = itm.value;
       }
     }
   }
