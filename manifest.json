@@ -29,8 +29,6 @@
   },
   "permissions": [
     "storage",
-    "tabs",
-    "https://*.twitter.com/*",
-    "https://twitter.com/*"
+    "tabs"
   ]
 }
