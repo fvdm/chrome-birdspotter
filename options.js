@@ -69,6 +69,3 @@ if (selects.length >= 1) {
 
 // First load
 loadOptions ();
-chrome.extension.sendRequest ({ action: 'apiLimit' }, function (res) {
-  document.getElementById ('apilimit') .innerHTML = res.limit.remaining_hits +' of '+ res.limit.hourly_limit +' <span class="note">(reset: '+ res.limit.reset_time +')</span>';
-});
